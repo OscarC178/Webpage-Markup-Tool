@@ -3,7 +3,7 @@ Internet Markup Tool
 
 **A powerful markup tool that lets you highlight, annotate, and take notes on any webpage.** Your work is saved with memory across sessions, and you can export everything seamlessly.
 
-| Privacy Policy | |
+[Download it from the Chrome Store](https://chromewebstore.google.com/detail/Web%20Page%20Markup%20Tool/lpoedmhdgkmngpgiodimgefgcglgcbpk?hl=en-GB)
 
 ✨ Features at a Glance
 ----------------------
@@ -17,8 +17,6 @@ This tool is designed to make web research and documentation efficient.
     
 *   **Persistent Memory:** All your highlights, underlines, and notes are **automatically saved**. Return to any page and your work reloads exactly where you left it.
     
-
-**Image Reference:** 2Markup\_tool\_showingmultiple\_highlight\_capability.jpg and 1MarkupToolSummaryofcapability.jpg
 
 🔧 How It Works
 ---------------
@@ -39,8 +37,6 @@ Place yellow sticky notes on the left side of the page, aligned with selected te
     
 *   Click the 'X' on a sticky note to delete it instantly.
     
-
-**Image Reference:** 3Markup\_tool\_with\_extension\_showing.jpg
 
 ### Simple Workflow
 
@@ -70,9 +66,7 @@ Access these powerful export features by clicking the extension icon in your Chr
 *   **Action:** Click **"Save Page as PDF"** in the extension menu.
     
 *   **Result:** Exports the entire webpage as a PDF with all your highlights, underlines, and sticky notes preserved exactly as they appear. Perfect for creating annotated research documents or study materials.
-    
-*   **Structured Output Example:Image Reference:** 4Markup\_Output\_Copy\_Paste.png
-    
+  
 
 🛠️ Built With
 --------------
