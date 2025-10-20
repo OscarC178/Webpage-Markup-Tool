@@ -1,0 +1,73 @@
+/**
+ * Toolbar Style
+ */
+#markup-toolbar {
+  position: absolute;
+  z-index: 99999;
+  background-color: #282828;
+  border-radius: 6px;
+  padding: 5px;
+  display: flex;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+#markup-toolbar button {
+  background-color: #444;
+  color: white;
+  font-family: sans-serif;
+  font-size: 14px;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+#markup-toolbar button:hover {
+  background-color: #666;
+}
+
+/**
+ * Markup Styles for the OVERLAY
+ */
+.markup--highlight {
+  mix-blend-mode: multiply;
+}
+
+.markup--underline {
+  /* Style is set in content.js */
+}
+
+/**
+ * NEW: Sticky Note Styles
+ */
+.markup-sticky-note {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  padding: 10px;
+  background-color: #FFF888;
+  border: 1px solid #E4E59A;
+  box-shadow: 2px 4px 10px rgba(0,0,0,0.2);
+  font-family: "Kalam", cursive, sans-serif;
+  font-size: 14px;
+  color: #333;
+  z-index: 10000;
+  resize: both;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.markup-sticky-note textarea {
+  flex-grow: 1;
+  border: none;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  padding: 8px;
+}
