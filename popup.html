@@ -1,71 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-GB">
 <head>
+  <meta charset="utf-8">
+  <title>Web Page Markup Tool</title>
   <style>
-    body { 
-      width: 250px; 
-      font-family: sans-serif; 
-      text-align: center; 
-      background-color: #f9f9f9;
-      padding: 10px;
+    /* Design tokens. Same values as the on-page controls (ui/styles.js). */
+    :root {
+      color-scheme: light dark;
+      --ground: #F2F2F5; --surface: #FFFFFF; --surface-2: #F4F4F5; --surface-3: #E4E4E7;
+      --border: #D4D4D8; --border-strong: #85858F;
+      --text: #18181B; --text-muted: #52525B;
+      --accent: #1D4ED8; --on-accent: #FFFFFF;
+      --danger: #B42318; --success: #17663A; --warning: #8A4B00;
+      --radius: 10px;
     }
-    h3 {
-      color: #333;
-      margin-top: 0;
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ground: #111113; --surface: #1C1C1F; --surface-2: #27272A; --surface-3: #3F3F46;
+        --border: #3F3F46; --border-strong: #7C7C87;
+        --text: #F4F4F5; --text-muted: #A1A1AA;
+        --accent: #8AB4FF; --on-accent: #0B1220;
+        --danger: #FF8A80; --success: #6FD69A; --warning: #FFC46B;
+      }
     }
-    button { 
-      width: 90%; 
-      padding: 10px; 
-      margin: 5px 0; 
-      cursor: pointer; 
-      border: 1px solid #ccc;
-      background-color: #fff;
-      border-radius: 4px;
-      transition: background-color 0.2s;
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body {
+      width: 320px; margin: 0; padding: 16px;
+      font: 400 14px/20px system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text); background: var(--ground);
     }
-    button:hover {
-      background-color: #f0f0f0;
+    h1 { font-size: 16px; line-height: 22px; font-weight: 600; letter-spacing: -0.01em; margin: 0; }
+    h2 { font-size: 13px; line-height: 18px; font-weight: 600; margin: 0; }
+    p { margin: 0; }
+    .muted { color: var(--text-muted); font-size: 13px; line-height: 18px; }
+    .page { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    /* Grouped panels on a tinted ground: spacing and a hairline, not hard dividers. */
+    section { background: var(--surface); border-radius: 14px; padding: 12px; margin-top: 10px;
+      box-shadow: 0 0 0 0.5px var(--border), 0 1px 2px rgba(0, 0, 0, .06); }
+    .count { font-weight: 600; }
+
+    button { font: inherit; color: inherit; cursor: pointer; }
+    .btn {
+      min-height: 36px; padding: 0 12px; border-radius: var(--radius);
+      border: 1px solid var(--border-strong); background: var(--surface); font-weight: 500;
+      transition: background-color 120ms cubic-bezier(0.2, 0, 0, 1), transform 80ms cubic-bezier(0.2, 0, 0, 1);
     }
-    #status { 
-      margin-top: 10px; 
-      padding: 5px;
-      font-size: 12px; 
-      min-height: 1.2em;
-    }
-    .setting {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 10px;
-      padding: 0 5%;
-    }
-    .setting-label {
-      font-size: 14px;
-    }
-    .color-picker {
-        border: 1px solid #ccc;
-        padding: 0;
-        height: 25px;
-        width: 40px;
-        cursor: pointer;
-    }
+    .btn:hover { background: var(--surface-2); }
+    .btn:active { background: var(--surface-3); transform: scale(.98); }
+    .btn { border-color: var(--border); }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+    .btn.primary:hover, .btn.primary:active { background: var(--accent); filter: brightness(1.1); }
+    .link { border: 0; background: none; padding: 0; color: var(--accent); text-decoration: underline; text-underline-offset: 2px; min-height: 24px; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+    .actions .primary { grid-column: 1 / -1; }
+    .actions .btn:not(.primary) { padding: 0 6px; font-size: 13px; white-space: nowrap; }
+    #status { margin-top: 8px; }
+    #status:empty { display: none; }
+
+    .head-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+    #checkList { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 6px; font-size: 13px; line-height: 18px; }
+    #checkList li { display: grid; grid-template-columns: 16px 1fr; gap: 6px; }
+    #checkList .mark { font-weight: 700; }
+    #checkList .warn .mark { color: var(--warning); }
+    #checkList .good .mark { color: var(--success); }
+
+    .setting { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+    .setting .swatches { margin-left: -8px; }
+    .swatches { display: flex; }
+    /* 36px target around a 20px colour dot */
+    .swatch { width: 36px; height: 36px; padding: 0; border: 0; background: none; border-radius: var(--radius); display: grid; place-items: center; }
+    .swatch::before { content: ""; width: 20px; height: 20px; border-radius: 999px; background: var(--dot); border: 1px solid rgba(127, 127, 127, .6); }
+    .swatch[aria-checked="true"]::before { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--text); }
+    .keys { margin-top: 8px; display: grid; gap: 2px; }
+    kbd { font: inherit; font-weight: 600; color: var(--text); }
+    /* "Show notes on the page": a native checkbox, 36px tall row so it is easy to hit. */
+    .toggle { display: flex; align-items: center; gap: 8px; min-height: 36px; margin-top: 8px; font-weight: 500; cursor: pointer; }
+    .toggle input { width: 18px; height: 18px; margin: 0; accent-color: var(--accent); cursor: pointer; }
+
+    /* "Leave a review" panel: shown on some opens (see lib/review.js), never blocks the rest. */
+    #reviewPanel { margin-top: 12px; }
+    /* Focus lands on the heading when the review panel closes; a ring round plain text would look like a control. */
+    #popupTitle:focus { outline: none; }
+    #reviewPanel .muted { margin-top: 2px; }
+    .stars { display: flex; margin: 6px 0 0 -6px; }
+    /* Each star is a 36px button around a 24px outline star; lit stars are filled. */
+    .star { width: 36px; height: 36px; padding: 0; border: 0; background: none; border-radius: var(--radius);
+      display: grid; place-items: center; color: var(--border-strong);
+      transition: color 120ms cubic-bezier(0.2, 0, 0, 1), transform 80ms cubic-bezier(0.2, 0, 0, 1); }
+    .star svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; }
+    .star.lit { color: var(--accent); }
+    .star.lit svg { fill: currentColor; }
+    .star:active { transform: scale(.92); }
+    .review-actions { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 6px; }
+    .link.quiet { color: var(--text-muted); font-size: 13px; }
+
+    @media (prefers-reduced-motion: reduce) { .btn, .star { transition: none; } .btn:active, .star:active { transform: none; } }
   </style>
 </head>
 <body>
-  <h3>Markup Exporter</h3>
-  <button id="copyTextBtn">Copy Marked Text</button>
-  <button id="downloadPdfBtn">Save Page as PDF</button>
-  <div id="status"></div>
+  <h1 id="popupTitle" tabindex="-1">Web Page Markup Tool</h1>
+  <p class="muted page" id="pageName"></p>
 
-  <div class="setting">
-    <span class="setting-label">Highlight Color</span>
-    <input type="color" id="highlightColorPicker" class="color-picker" value="#fff888">
-  </div>
-  <div class="setting">
-    <span class="setting-label">Underline Color</span>
-    <input type="color" id="underlineColorPicker" class="color-picker" value="#ff5555">
+  <!-- Review prompt. popup.js decides when to show it and fills in the stars. -->
+  <section id="reviewPanel" aria-labelledby="reviewHeading" hidden>
+    <h2 id="reviewHeading">Enjoying Web Page Markup Tool?</h2>
+    <p class="muted">A quick review helps other people find it.</p>
+    <div class="stars" id="reviewStars" role="group" aria-labelledby="reviewHeading"></div>
+    <div class="review-actions">
+      <button class="link" id="reviewLater" type="button">Remind me later</button>
+      <button class="link quiet" id="reviewNever" type="button">Don't ask again</button>
+    </div>
+  </section>
+
+  <!-- Shown instead of everything else when this tab cannot be marked up. -->
+  <p id="message" style="margin-top: 12px" hidden></p>
+  <button class="btn" id="reloadBtn" style="margin-top: 12px" hidden>Reload page</button>
+
+  <!-- PDF: shown on a tab that is a PDF in Chrome's own viewer, or a PDF file on this computer. -->
+  <section id="pdfSection" aria-labelledby="pdfHeading" hidden>
+    <h2 id="pdfHeading">This tab is a PDF</h2>
+    <p class="muted" style="margin-top: 4px">Open it in the extension's PDF viewer to highlight, underline and add notes. Your marks stay with this PDF, even if you open it again from a different link.</p>
+    <div class="actions"><button class="btn primary" id="pdfOpenBtn">Mark up this PDF</button></div>
+    <label class="toggle" id="pdfAutoRow">
+      <input type="checkbox" id="pdfAuto">
+      <span>Always open PDFs in the markup viewer</span>
+    </label>
+    <p class="muted" id="pdfStatus" role="status"></p>
+  </section>
+
+  <div id="main" hidden>
+    <section aria-labelledby="countLine">
+      <p class="count" id="countLine"></p>
+      <p class="muted" id="breakdown"></p>
+      <div class="actions" id="actions">
+        <button class="btn primary" id="copyBtn">Copy as Markdown</button>
+        <button class="btn" id="jsonBtn">Download JSON</button>
+        <button class="btn" id="printBtn">Print or save PDF</button>
+      </div>
+      <p class="muted" id="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="checkSection" aria-labelledby="checkHeading">
+      <div class="head-row">
+        <h2 id="checkHeading">Check this page</h2>
+        <button class="link" id="recheckBtn">Check again</button>
+      </div>
+      <ul id="checkList"></ul>
+    </section>
+
+    <section aria-labelledby="colourHeading">
+      <div class="setting">
+        <h2 id="colourHeading">Default colour</h2>
+        <div class="swatches" id="swatches" role="radiogroup" aria-labelledby="colourHeading"></div>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="showNotes" aria-describedby="showNotesHint">
+        <span>Show notes on the page</span>
+      </label>
+      <p class="muted" id="showNotesHint">Notes appear beside their words. Off: a small pin marks each note.</p>
+      <div class="muted keys">
+        <span><kbd>Alt+Shift+H</kbd> mark the selected text</span>
+        <span><kbd>Alt+Shift+N</kbd> go to the next note</span>
+      </div>
+    </section>
   </div>
 
+  <script src="lib/url.js"></script>
+  <script src="lib/palette.js"></script>
+  <script src="lib/review.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>

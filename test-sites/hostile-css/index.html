@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brash &amp; Co | Hostile stylesheet</title>
+<style>
+  /* Deliberately aggressive CSS, of the kind that breaks injected extension UI. */
+  * { box-sizing:content-box !important; margin:0 !important; padding:0 !important; font:italic 700 17px/1.3 "Courier New", monospace !important; letter-spacing:.5px !important; text-transform:none; }
+  html { background:#222; }
+  body { position:relative !important; transform:translateZ(0) scale(.98); transform-origin:0 0; zoom:1.02; width:900px; background:#fff8e1; color:#111; }
+  p, h1, h2, h3, section, div { margin-bottom:12px !important; padding:6px 14px !important; }
+  button, input[type=button] { all:unset; display:inline-block !important; background:#d500f9 !important; color:#fff !important; border:3px solid #000 !important; padding:10px 22px !important; cursor:crosshair !important; text-transform:uppercase !important; border-radius:0 !important; }
+  textarea { background:#000 !important; color:#0f0 !important; border:4px double #f0f !important; width:300px !important; height:40px !important; resize:none !important; }
+  div { background-image:none !important; }
+  /* rules that collide with generic extension naming */
+  [id*="toolbar"] { display:none !important; background:red !important; position:static !important; }
+  [id*="toolbar"] button { display:none !important; }
+  [class*="note"] { position:static !important; width:10px !important; height:10px !important; overflow:hidden !important; background:#0f0 !important; opacity:.1 !important; }
+  [class*="markup"] { visibility:hidden !important; }
+  #markup-highlight-overlay { z-index:-1 !important; opacity:.2 !important; }
+  ::selection { background:#00e5ff; color:#b71c1c; }
+  header.site { position:fixed; top:0; left:0; right:0; z-index:2147483647; background:linear-gradient(90deg,#ff1744,#ff9100); color:#fff; }
+  header.site h1 { font-size:22px !important; }
+  main { margin-top:70px !important; }
+  .modal-layer { position:fixed; inset:auto 20px 20px auto; width:260px; z-index:2147483646; background:#311b92; color:#ffea00; border:4px solid #ffea00; }
+  .on-yellow { background:#ffeb3b; color:#333; }
+  .on-gradient { background:linear-gradient(135deg,#1a237e,#e91e63 60%,#ffc107); color:#fff; }
+  .on-pattern { background-color:#795548; background-image:repeating-linear-gradient(45deg, rgba(255,255,255,.18) 0 8px, transparent 8px 16px); color:#fff; }
+  .on-checker { background-color:#eee; background-image:conic-gradient(#bbb 25%, #fff 0 50%, #bbb 0 75%, #fff 0); background-size:24px 24px; color:#000; }
+  .clip-text { background:linear-gradient(90deg,#e91e63,#2196f3); -webkit-background-clip:text; background-clip:text; color:transparent !important; -webkit-text-fill-color:transparent; font-size:26px !important; }
+  .blend { background:#009688; color:#f50057; mix-blend-mode:difference; }
+  .c-yellow { color:#ffee00; background:#333; } .c-red { color:#e00000; } .c-pale { color:#dddddd; background:#fff; }
+  .printonly { display:none; }
+  @media print {
+    header.site, .modal-layer, button, textarea { display:none !important; }
+    body { background:#fff !important; color:#000 !important; transform:none; zoom:1; width:auto; }
+    .printonly { display:block !important; border:1px solid #000; }
+    .on-gradient, .on-pattern, .on-yellow, .on-checker { background:none !important; color:#000 !important; }
+  }
+</style>
+</head>
+<body>
+<header class="site" id="site-header" data-test="site-header"><h1>BRASH &amp; CO. LOUD SIGNAGE SINCE 1952</h1></header>
+<main>
+  <section id="hc-intro-section">
+    <h2>Hostile stylesheet test</h2>
+    <p id="hc-intro" data-test="hc-intro">This page wages war on injected interface. Everything is set in bold italic monospace with <em>!important</em> on the font shorthand, margins and padding are zeroed by a universal rule, and the body is both <strong>positioned and transformed</strong>, which makes it the containing block for any fixed or absolute descendants.</p>
+    <p id="hc-inline" data-test="hc-inline">A selection here crosses <strong>bold, <em>nested emphasis</em></strong> and <a href="#">a link</a> before ending in plain text, to check that range rectangles survive a scaled, zoomed body.</p>
+  </section>
+
+  <section id="note-section" class="note-box" data-test="note-like">
+    <h3>A section whose class contains the word note</h3>
+    <p>This element matches <code>[class*="note"]</code>, which the stylesheet squashes to ten pixels and turns green. Its text is still in the DOM and still selectable if you can find it, which is the entire problem.</p>
+  </section>
+
+  <div id="page-toolbar" class="toolbar-like" data-test="toolbar-like">
+    <p>This container's id contains "toolbar", so the page hides it with <code>display:none !important</code>. The extension's own toolbar id differs, but a careless substring rule would catch both.</p>
+  </div>
+
+  <div class="on-yellow" id="bg-yellow" data-test="bg-yellow"><p>Dark text on a yellow background. A yellow highlight over this will vanish; the underline is the only thing that will show.</p></div>
+  <div class="on-gradient" id="bg-gradient" data-test="bg-gradient"><p>White text over a three-stop diagonal gradient from navy through pink to amber, so contrast changes along the line.</p></div>
+  <div class="on-pattern" id="bg-pattern"><p>Text over a repeating striped pattern that stands in for a background image.</p></div>
+  <div class="on-checker" id="bg-checker"><p>Text over a conic-gradient chessboard in two greys.</p></div>
+
+  <div><p class="clip-text" id="clip-text" data-test="clip-text">Gradient text via background-clip</p></div>
+  <div><p class="blend" id="blend-text" data-test="blend-text">Mix-blend-mode difference text</p></div>
+
+  <div id="colour-clash" data-test="colour-clash"><p>Colours that clash with markup: <span class="c-yellow" id="span-yellow">yellow text on charcoal</span>, <span class="c-red" id="span-red">red text that hides a red underline</span> and <span class="c-pale" id="span-pale">very pale grey text on white</span> sit in one line.</p></div>
+
+  <div>
+    <button type="button" id="hc-button">Garish button</button>
+    <textarea id="hc-textarea">A hostile textarea</textarea>
+  </div>
+  <div class="printonly" id="print-only"><p>This block only appears when printing, where the header, modal and buttons are removed and backgrounds are flattened.</p></div>
+  <div style="height:900px"></div>
+</main>
+<aside class="modal-layer" id="modal-layer" data-test="modal-layer"><p>Fixed layer at the highest possible z-index, above the extension's toolbar and overlay.</p></aside>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quillwork Docs | Getting started</title>
+<link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<header class="top"><a class="brand" href="index.html">Quillwork<span>docs</span></a>
+  <nav><a href="index.html" class="on">Reference</a><a href="guide.html">Guide</a><a href="#changelog">Changelog</a></nav></header>
+<div class="layout">
+<aside class="side" id="sidenav">
+  <h4>On this page</h4>
+  <ul>
+    <li><a href="#install">Installation</a></li>
+    <li><a href="#config">Configuration</a></li>
+    <li><a href="#options">Options reference</a></li>
+    <li><a href="#api">API</a></li>
+    <li><a href="#errors">Error codes</a></li>
+    <li><a href="#changelog">Changelog</a></li>
+  </ul>
+  <h4>More</h4>
+  <ul><li><a href="guide.html">Writing a plugin</a></li><li><a href="guide.html#testing">Testing plugins</a></li></ul>
+</aside>
+<main class="content" id="content">
+  <h1 id="top">Quillwork reference</h1>
+  <p id="intro" class="lead">Quillwork is a small, fictional static-site generator that turns a folder of Markdown files into a folder of HTML files. This page documents the command line, the configuration file and the programmatic <abbr title="Application programming interface">API</abbr>.</p>
+
+  <h2 id="install">Installation</h2>
+  <p id="para-install">Quillwork needs <strong>Node.js 20 or later</strong>. Install it globally to get the <code>quill</code> command, or add it to a project as a development dependency so that every contributor builds with the same version. A global install is quicker for experiments; a local one is better for anything you intend to keep.</p>
+  <pre id="code-install" data-test="code-install"><code># global install
+npm install --global quillwork
+
+# or per project
+npm install --save-dev quillwork
+npx quill --version</code></pre>
+  <p>If the final command prints a version number, you are ready to continue. If it prints <code>command not found</code>, check that your package manager's <em>bin</em> directory is on your <code>PATH</code>.</p>
+
+  <h2 id="config">Configuration</h2>
+  <p id="para-config">Quillwork reads <code>quill.config.json</code> from the directory where you run it. Every key is optional; a missing file is the same as an empty object. Paths are resolved relative to the configuration file, <em>not</em> to the working directory, which is a common source of surprise when running from a subfolder.</p>
+  <pre><code>{
+  "source": "./content",
+  "output": "./public",
+  "baseUrl": "/",
+  "plugins": ["quill-feed", "./local-plugin.js"],
+  "minify": true
+}</code></pre>
+
+  <h3 id="config-env">Environment variables</h3>
+  <p>Any option can be overridden with an environment variable named <code>QUILL_</code> followed by the option in upper case. For example, <code>QUILL_OUTPUT=dist</code> changes the output folder for a single run without touching the file.</p>
+
+  <h2 id="options">Options reference</h2>
+  <table id="options-table" data-test="options-table">
+    <thead><tr><th>Option</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>source</code></td><td>string</td><td><code>"./content"</code></td><td>Folder containing Markdown source files.</td></tr>
+      <tr><td><code>output</code></td><td>string</td><td><code>"./public"</code></td><td>Folder the generated site is written to. It is emptied before each build.</td></tr>
+      <tr><td><code>baseUrl</code></td><td>string</td><td><code>"/"</code></td><td>Prefix added to every generated internal link.</td></tr>
+      <tr><td><code>plugins</code></td><td>string[]</td><td><code>[]</code></td><td>Package names or relative paths of plugins, run in order.</td></tr>
+      <tr><td><code>minify</code></td><td>boolean</td><td><code>false</code></td><td>Remove whitespace from generated HTML and CSS.</td></tr>
+      <tr><td><code>drafts</code></td><td>boolean</td><td><code>false</code></td><td>Include files whose front matter sets <code>draft: true</code>.</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="api">API</h2>
+  <p id="para-api">The programmatic interface exposes a single asynchronous function, <code>build(options)</code>, which resolves with a summary of what was written. It accepts the same keys as the configuration file, and merges them over the values that were loaded from disk, so a script can override just one setting. Errors are thrown as instances of <code>QuillError</code>, each carrying one of the codes listed <a href="#errors">below</a>.</p>
+  <pre><code>import { build } from "quillwork";
+
+const summary = await build({ drafts: true });
+console.log(`${summary.pages} pages in ${summary.ms} ms`);</code></pre>
+
+  <h2 id="errors">Error codes</h2>
+  <table>
+    <thead><tr><th>Code</th><th>Meaning</th><th>Usual fix</th></tr></thead>
+    <tbody>
+      <tr><td><code>Q001</code></td><td>Source folder not found</td><td>Check the <code>source</code> path.</td></tr>
+      <tr><td><code>Q014</code></td><td>Invalid front matter</td><td>Look for an unclosed quotation mark.</td></tr>
+      <tr><td><code>Q022</code></td><td>Plugin threw during <em>transform</em></td><td>Run with <code>--trace</code> to see the stack.</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="changelog">Changelog</h2>
+  <p>Version 2.4 added the <code>drafts</code> option and made <code>output</code> safe to point at a folder that does not yet exist. Version 2.3 fixed a long-standing bug in which relative links inside nested folders were rewritten twice. Earlier versions are summarised in the <a href="guide.html#history">guide</a>.</p>
+  <p class="spacer">Return to <a href="#top">the top</a>. This final paragraph is padded so that the last sections can scroll fully beneath the sticky header when you jump to them from the sidebar.</p>
+  <div style="height:60vh"></div>
+</main>
+</div>
+</body>
+</html>

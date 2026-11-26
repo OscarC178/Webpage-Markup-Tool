@@ -1,0 +1,280 @@
+<title>Markup Tool Icon Options</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  /* Layout: three option cards side by side; each shows the icon at store size, 48 px and 16 px on light and dark toolbars. */
+  :root { --bg: #F3F4F6; --surface: #FFFFFF; --fg: #16181D; --muted: #555B66; --line: #D5D8DE; --chrome-light: #E9EBEF; --chrome-dark: #2A2C31; --dot-light: #B8BCC6; --dot-dark: #5C606B; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #111318; --surface: #1B1E25; --fg: #ECEEF2; --muted: #A3A9B5; --line: #343945; color-scheme: dark; } }
+  :root[data-theme="dark"] { --bg: #111318; --surface: #1B1E25; --fg: #ECEEF2; --muted: #A3A9B5; --line: #343945; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 400 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding-block: 36px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 24px; }
+  h1 { font-size: 1.75rem; line-height: 1.2; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+  h2 { font-size: 1.125rem; margin: 0; }
+  p { margin: 0; max-width: 68ch; }
+  .lead { color: var(--muted); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  article { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  .idea { font-size: 0.9375rem; }
+  .sizes { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 14px; }
+  figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  figcaption { font-size: 0.75rem; color: var(--muted); }
+  .tile, .bar { display: flex; align-items: center; justify-content: center; border-radius: 8px; }
+  .tile.light { background: #FFFFFF; border: 1px solid var(--line); padding: 6px; }
+  .bar { gap: 10px; padding: 9px 12px; }
+  .bar.light { background: var(--chrome-light); } .bar.dark { background: var(--chrome-dark); }
+  .bar i { width: 16px; height: 16px; border-radius: 4px; }
+  .bar.light i { background: var(--dot-light); } .bar.dark i { background: var(--dot-dark); }
+  .sizes span { display: block; } .sizes svg { display: block; width: 100%; height: 100%; }
+  dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size: 0.9375rem; }
+  dt { font-weight: 600; color: var(--muted); } dd { margin: 0; }
+</style>
+<div class="wrap">
+  <h1>Web Page Markup Tool: three icon options</h1>
+  <p class="lead">Each is shown at the sizes Chrome uses: 128 px on the store, 48 px on the extensions page, and 16 px in the browser toolbar, on light and dark. The grey squares stand in for neighbouring extension icons.</p>
+  <div class="grid">
+  <article>
+    <h2>A · Swipe</h2>
+    <p class="idea">One highlighted letter. Says "marks up text" in one glance.</p>
+    <div class="sizes">
+      <figure><div class="tile light"><span style="width:128px;height:128px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="a-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2E2E35"/>
+      <stop offset="1" stop-color="#17171B"/>
+    </linearGradient>
+    <linearGradient id="a-mark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE873"/>
+      <stop offset="1" stop-color="#FFD21F"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="96" height="96" rx="22" fill="url(#a-tile)"/>
+  
+  <rect x="26" y="32" width="76" height="64" rx="10" fill="url(#a-mark)" transform="rotate(-6 64 64)"/>
+  
+  <path fill-rule="evenodd" fill="#17171B"
+        d="M57 39 H71 L90 89 H77 L73.5 79 H54.5 L51 89 H38 Z M64 52 L58.5 68.5 H69.5 Z"/>
+  <rect x="16.5" y="16.5" width="95" height="95" rx="21.5" fill="none" stroke="#FFFFFF" stroke-opacity=".14"/>
+</svg></span></div><figcaption>128 px, store</figcaption></figure>
+      <figure><div class="tile light"><span style="width:48px;height:48px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="a-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2E2E35"/>
+      <stop offset="1" stop-color="#17171B"/>
+    </linearGradient>
+    <linearGradient id="a-mark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE873"/>
+      <stop offset="1" stop-color="#FFD21F"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="96" height="96" rx="22" fill="url(#a-tile)"/>
+  
+  <rect x="26" y="32" width="76" height="64" rx="10" fill="url(#a-mark)" transform="rotate(-6 64 64)"/>
+  
+  <path fill-rule="evenodd" fill="#17171B"
+        d="M57 39 H71 L90 89 H77 L73.5 79 H54.5 L51 89 H38 Z M64 52 L58.5 68.5 H69.5 Z"/>
+  <rect x="16.5" y="16.5" width="95" height="95" rx="21.5" fill="none" stroke="#FFFFFF" stroke-opacity=".14"/>
+</svg></span></div><figcaption>48 px</figcaption></figure>
+      <figure><div class="bar light"><i></i><span style="width:16px;height:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="a-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2E2E35"/>
+      <stop offset="1" stop-color="#17171B"/>
+    </linearGradient>
+    <linearGradient id="a-mark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE873"/>
+      <stop offset="1" stop-color="#FFD21F"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="96" height="96" rx="22" fill="url(#a-tile)"/>
+  
+  <rect x="26" y="32" width="76" height="64" rx="10" fill="url(#a-mark)" transform="rotate(-6 64 64)"/>
+  
+  <path fill-rule="evenodd" fill="#17171B"
+        d="M57 39 H71 L90 89 H77 L73.5 79 H54.5 L51 89 H38 Z M64 52 L58.5 68.5 H69.5 Z"/>
+  <rect x="16.5" y="16.5" width="95" height="95" rx="21.5" fill="none" stroke="#FFFFFF" stroke-opacity=".14"/>
+</svg></span><i></i></div><figcaption>16 px, light toolbar</figcaption></figure>
+      <figure><div class="bar dark"><i></i><span style="width:16px;height:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="a-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2E2E35"/>
+      <stop offset="1" stop-color="#17171B"/>
+    </linearGradient>
+    <linearGradient id="a-mark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE873"/>
+      <stop offset="1" stop-color="#FFD21F"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="96" height="96" rx="22" fill="url(#a-tile)"/>
+  
+  <rect x="26" y="32" width="76" height="64" rx="10" fill="url(#a-mark)" transform="rotate(-6 64 64)"/>
+  
+  <path fill-rule="evenodd" fill="#17171B"
+        d="M57 39 H71 L90 89 H77 L73.5 79 H54.5 L51 89 H38 Z M64 52 L58.5 68.5 H69.5 Z"/>
+  <rect x="16.5" y="16.5" width="95" height="95" rx="21.5" fill="none" stroke="#FFFFFF" stroke-opacity=".14"/>
+</svg></span><i></i></div><figcaption>16 px, dark toolbar</figcaption></figure>
+    </div>
+    <dl><dt>For</dt><dd>Strongest contrast in the browser toolbar; still reads as a yellow block with a letter at 16 px.</dd><dt>Against</dt><dd>A lettermark "A" is a common icon shape; less distinctive in a row of extensions.</dd></dl>
+  </article>
+  <article>
+    <h2>B · Nib</h2>
+    <p class="idea">A highlighter pen laying down a stroke. The literal tool, keeping the link to the current icon.</p>
+    <div class="sizes">
+      <figure><div class="tile light"><span style="width:128px;height:128px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="b-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EDEDF2"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="96" height="96" rx="22" fill="url(#b-tile)"/>
+  
+  <rect x="28" y="82" width="46" height="14" rx="5" fill="#FFD21F"/>
+  
+  <g transform="translate(66 92) rotate(40)">
+    <path d="M-8 -15 H8 L5 0 H-5 Z" fill="#FFD21F"/>
+    <rect x="-10" y="-25" width="20" height="11" rx="3" fill="#44444D"/>
+    <rect x="-12" y="-66" width="24" height="43" rx="8" fill="#1B1B1F"/>
+    <rect x="-12" y="-44" width="24" height="8" fill="#FFD21F"/>
+  </g>
+  <rect x="16.5" y="16.5" width="95" height="95" rx="21.5" fill="none" stroke="#000000" stroke-opacity=".14"/>
+</svg></span></div><figcaption>128 px, store</figcaption></figure>
+      <figure><div class="tile light"><span style="width:48px;height:48px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="b-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EDEDF2"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="96" height="96" rx="22" fill="url(#b-tile)"/>
+  
+  <rect x="28" y="82" width="46" height="14" rx="5" fill="#FFD21F"/>
+  
+  <g transform="translate(66 92) rotate(40)">
+    <path d="M-8 -15 H8 L5 0 H-5 Z" fill="#FFD21F"/>
+    <rect x="-10" y="-25" width="20" height="11" rx="3" fill="#44444D"/>
+    <rect x="-12" y="-66" width="24" height="43" rx="8" fill="#1B1B1F"/>
+    <rect x="-12" y="-44" width="24" height="8" fill="#FFD21F"/>
+  </g>
+  <rect x="16.5" y="16.5" width="95" height="95" rx="21.5" fill="none" stroke="#000000" stroke-opacity=".14"/>
+</svg></span></div><figcaption>48 px</figcaption></figure>
+      <figure><div class="bar light"><i></i><span style="width:16px;height:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="b-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EDEDF2"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="96" height="96" rx="22" fill="url(#b-tile)"/>
+  
+  <rect x="28" y="82" width="46" height="14" rx="5" fill="#FFD21F"/>
+  
+  <g transform="translate(66 92) rotate(40)">
+    <path d="M-8 -15 H8 L5 0 H-5 Z" fill="#FFD21F"/>
+    <rect x="-10" y="-25" width="20" height="11" rx="3" fill="#44444D"/>
+    <rect x="-12" y="-66" width="24" height="43" rx="8" fill="#1B1B1F"/>
+    <rect x="-12" y="-44" width="24" height="8" fill="#FFD21F"/>
+  </g>
+  <rect x="16.5" y="16.5" width="95" height="95" rx="21.5" fill="none" stroke="#000000" stroke-opacity=".14"/>
+</svg></span><i></i></div><figcaption>16 px, light toolbar</figcaption></figure>
+      <figure><div class="bar dark"><i></i><span style="width:16px;height:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="b-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EDEDF2"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="96" height="96" rx="22" fill="url(#b-tile)"/>
+  
+  <rect x="28" y="82" width="46" height="14" rx="5" fill="#FFD21F"/>
+  
+  <g transform="translate(66 92) rotate(40)">
+    <path d="M-8 -15 H8 L5 0 H-5 Z" fill="#FFD21F"/>
+    <rect x="-10" y="-25" width="20" height="11" rx="3" fill="#44444D"/>
+    <rect x="-12" y="-66" width="24" height="43" rx="8" fill="#1B1B1F"/>
+    <rect x="-12" y="-44" width="24" height="8" fill="#FFD21F"/>
+  </g>
+  <rect x="16.5" y="16.5" width="95" height="95" rx="21.5" fill="none" stroke="#000000" stroke-opacity=".14"/>
+</svg></span><i></i></div><figcaption>16 px, dark toolbar</figcaption></figure>
+    </div>
+    <dl><dt>For</dt><dd>Closest to what people already recognise from version 1; shows the action.</dd><dt>Against</dt><dd>Most detail, so it is the weakest at 16 px: the pen becomes a dark diagonal.</dd></dl>
+  </article>
+  <article>
+    <h2>C · Cursor</h2>
+    <p class="idea">The tile itself is highlighter yellow, with a text cursor mid-selection. Says "select text, then mark it".</p>
+    <div class="sizes">
+      <figure><div class="tile light"><span style="width:128px;height:128px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="c-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE873"/>
+      <stop offset="1" stop-color="#FFCF1F"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="96" height="96" rx="22" fill="url(#c-tile)"/>
+  
+  <rect x="30" y="50" width="40" height="28" rx="5" fill="#FFFFFF"/>
+  
+  <rect x="67" y="38" width="8" height="52" rx="2" fill="#1B1B1F"/>
+  <rect x="57" y="34" width="28" height="8" rx="4" fill="#1B1B1F"/>
+  <rect x="57" y="86" width="28" height="8" rx="4" fill="#1B1B1F"/>
+  
+  <rect x="82" y="60" width="16" height="8" rx="4" fill="#1B1B1F" fill-opacity=".35"/>
+  <rect x="16.5" y="16.5" width="95" height="95" rx="21.5" fill="none" stroke="#000000" stroke-opacity=".12"/>
+</svg></span></div><figcaption>128 px, store</figcaption></figure>
+      <figure><div class="tile light"><span style="width:48px;height:48px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="c-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE873"/>
+      <stop offset="1" stop-color="#FFCF1F"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="96" height="96" rx="22" fill="url(#c-tile)"/>
+  
+  <rect x="30" y="50" width="40" height="28" rx="5" fill="#FFFFFF"/>
+  
+  <rect x="67" y="38" width="8" height="52" rx="2" fill="#1B1B1F"/>
+  <rect x="57" y="34" width="28" height="8" rx="4" fill="#1B1B1F"/>
+  <rect x="57" y="86" width="28" height="8" rx="4" fill="#1B1B1F"/>
+  
+  <rect x="82" y="60" width="16" height="8" rx="4" fill="#1B1B1F" fill-opacity=".35"/>
+  <rect x="16.5" y="16.5" width="95" height="95" rx="21.5" fill="none" stroke="#000000" stroke-opacity=".12"/>
+</svg></span></div><figcaption>48 px</figcaption></figure>
+      <figure><div class="bar light"><i></i><span style="width:16px;height:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="c-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE873"/>
+      <stop offset="1" stop-color="#FFCF1F"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="96" height="96" rx="22" fill="url(#c-tile)"/>
+  
+  <rect x="30" y="50" width="40" height="28" rx="5" fill="#FFFFFF"/>
+  
+  <rect x="67" y="38" width="8" height="52" rx="2" fill="#1B1B1F"/>
+  <rect x="57" y="34" width="28" height="8" rx="4" fill="#1B1B1F"/>
+  <rect x="57" y="86" width="28" height="8" rx="4" fill="#1B1B1F"/>
+  
+  <rect x="82" y="60" width="16" height="8" rx="4" fill="#1B1B1F" fill-opacity=".35"/>
+  <rect x="16.5" y="16.5" width="95" height="95" rx="21.5" fill="none" stroke="#000000" stroke-opacity=".12"/>
+</svg></span><i></i></div><figcaption>16 px, light toolbar</figcaption></figure>
+      <figure><div class="bar dark"><i></i><span style="width:16px;height:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="c-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE873"/>
+      <stop offset="1" stop-color="#FFCF1F"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="96" height="96" rx="22" fill="url(#c-tile)"/>
+  
+  <rect x="30" y="50" width="40" height="28" rx="5" fill="#FFFFFF"/>
+  
+  <rect x="67" y="38" width="8" height="52" rx="2" fill="#1B1B1F"/>
+  <rect x="57" y="34" width="28" height="8" rx="4" fill="#1B1B1F"/>
+  <rect x="57" y="86" width="28" height="8" rx="4" fill="#1B1B1F"/>
+  
+  <rect x="82" y="60" width="16" height="8" rx="4" fill="#1B1B1F" fill-opacity=".35"/>
+  <rect x="16.5" y="16.5" width="95" height="95" rx="21.5" fill="none" stroke="#000000" stroke-opacity=".12"/>
+</svg></span><i></i></div><figcaption>16 px, dark toolbar</figcaption></figure>
+    </div>
+    <dl><dt>For</dt><dd>The yellow tile is recognisable by colour alone at any size; simplest shape.</dd><dt>Against</dt><dd>A text cursor can also read as "typing" or "rename"; least literal about highlighting.</dd></dl>
+  </article></div>
+</div>

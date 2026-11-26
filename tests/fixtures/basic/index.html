@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Harness fixture: plain article</title>
+<style>
+  body { font-family: Georgia, serif; max-width: 640px; margin: 40px auto; line-height: 1.6; padding: 0 20px; }
+  .spacer { height: 1400px; background: linear-gradient(#f4f4f4, #e4e4e4); }
+</style>
+</head>
+<body>
+  <!-- Throwaway page used to develop and self-test the harness. Not one of the real test sites. -->
+  <h1 id="title">A plain article for the harness</h1>
+  <p id="p1">The quick brown fox jumps over the lazy dog while the harness watches every single move it makes.</p>
+  <p id="p2">Second paragraph with enough words in it to wrap across more than one line when the window is narrow, so that a selection spanning the wrap produces several rectangles rather than only one.</p>
+  <p id="p3">A third paragraph which holds the note target and nothing else of interest to anybody at all.</p>
+  <div class="spacer"></div>
+  <p id="p4">A paragraph far down the page, below the fold, to test scrolling behaviour properly.</p>
+  <script>
+    // Stand-in for a site with single-key shortcuts ("j", "k", "/" ...). The keyboard check (u)
+    // reads these lists to see whether keys typed into the extension's note box leak to the page.
+    window.__pageKeys = { document: [], windowCapture: [] };
+    document.addEventListener('keydown', function (e) { window.__pageKeys.document.push(e.key); });
+    window.addEventListener('keydown', function (e) { window.__pageKeys.windowCapture.push(e.key); }, true);
+  </script>
+</body>
+</html>

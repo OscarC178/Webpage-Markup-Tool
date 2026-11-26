@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meridian Review | Voices of the Quarter</title>
+<style>
+  :root { --ink:#222; --paper:#fffdf8; --accent:#b4322a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font:17px/1.6 Georgia, "Times New Roman", serif; }
+  header { padding:28px 32px 12px; border-bottom:4px solid var(--ink); }
+  header h1 { margin:0; font-size:3.4rem; letter-spacing:.02em; }
+  header p { margin:4px 0 0; font:italic 1rem Georgia, serif; color:#555; }
+  main { max-width:1100px; margin:0 auto; padding:24px 28px 80px; }
+  .columns { column-count:3; column-gap:36px; column-rule:1px solid #ddd; text-align:justify; hyphens:auto; -webkit-hyphens:auto; }
+  .columns h2 { column-span:none; margin:0 0 .4em; font-size:1.4rem; break-after:avoid; }
+  .columns p { margin:0 0 1em; }
+  .columns .break { break-inside:avoid; }
+  .xl { font-size:5rem; line-height:1.05; font-weight:700; margin:.4em 0; }
+  .tiny { font-size:7px; line-height:1.2; letter-spacing:.02em; }
+  .band { margin:30px 0; padding:20px 24px; border:1px solid #ddd; border-radius:6px; background:#fff; }
+  [dir="rtl"] { text-align:right; font-family:"Noto Naskh Arabic", "Amiri", "DejaVu Sans", serif; font-size:1.2rem; line-height:2; }
+  .cjk { font-family:"Noto Serif CJK JP", "Noto Sans CJK JP", "IPAexMincho", serif; line-height:1.9; }
+  .emoji { font-size:1.5rem; }
+  .justify { text-align:justify; hyphens:auto; -webkit-hyphens:auto; width:260px; border:1px dashed #bbb; padding:8px; }
+  @media (max-width:860px){ .columns{column-count:1} .xl{font-size:3rem} }
+</style>
+</head>
+<body>
+<header><h1>Meridian Review</h1><p>A quarterly of essays, translations and small arguments</p></header>
+<main>
+  <section class="columns" id="columns" data-test="columns">
+    <h2 id="col-head">The long way round the alphabet</h2>
+    <p id="col-para-1">Every language, sooner or later, discovers that it cannot say a particular thing, and borrows a word from its neighbour. English has been doing this for a thousand years with the cheerful shamelessness of a magpie, and the result is a vocabulary in which <em>algorithm</em>, <em>umbrella</em> and <em>kayak</em> sit side by side without a flicker of embarrassment. This issue is concerned with the other direction of travel: the words that refuse to cross.</p>
+    <p id="col-para-2">Our contributors this quarter include a translator who spent eleven years on a single novel, a lexicographer who maintains that <strong>no word has ever truly been <em>untranslatable</em>, only inconveniently long</strong>, and a typographer who would like everybody to stop using the word "font" when they mean "typeface". Extraordinarily, they were all in the same room at once, and the minutes record that nobody threw anything.</p>
+    <p>Hyphenation deserves a note of its own. A justified column of text lives or dies by its ability to break long words gracefully; incomprehensibilities, internationalisation and counterrevolutionaries are the sort of words that, in a narrow column, test the patience of a layout engine and the eyesight of a reader. A good engine breaks them quietly and carries on.</p>
+    <p>The columns that follow flow from one to the next without regard for sentences, which is how magazines have always worked. A selection that begins at the foot of one column and ends at the head of the next is not an error; it is simply the reader's eye doing what the printer intended.</p>
+    <p>There is, we are told, a Finnish word for the distance a reindeer can comfortably travel before needing a rest, and a Japanese word for the pleasure of buying a book and never reading it. Both are real, and both are extremely useful, and neither will appear in this issue because the editors could not agree on how to spell them in public.</p>
+  </section>
+
+  <div class="band">
+    <p class="xl" id="xl-text">Big words, small print</p>
+    <p class="tiny" id="tiny-text">This paragraph is set in seven pixel type, which is approximately the size of the text on a medicine bottle and roughly one third of the size of the sense of dread you feel when you try to read it. It exists to check that selections and their overlays still line up when the line boxes are only a few pixels tall.</p>
+  </div>
+
+  <div class="band" dir="rtl" lang="ar" id="rtl-section" data-test="rtl-section">
+    <h2 id="rtl-head">أصوات من الضفة الأخرى</h2>
+    <p id="rtl-para">تُكتب اللغة العربية من اليمين إلى اليسار، وهذا يعني أن كل سطر يبدأ من الحافة اليمنى للصفحة وينتهي عند اليسرى. وعندما تتداخل <strong>كلمات إنجليزية مثل Meridian Review</strong> مع النص العربي، يتغير اتجاه القراءة داخل السطر الواحد عدة مرات، وهذا اختبار جيد لأي أداة تضع علامات على النصوص. تقول الحكاية إن المترجم قضى ليلة كاملة يبحث عن كلمة واحدة تصف صوت المطر على سطح قديم.</p>
+  </div>
+
+  <div class="band cjk" lang="ja" id="cjk-section" data-test="cjk-section">
+    <h2 id="cjk-head">言葉の旅</h2>
+    <p id="cjk-para">日本語の文章には、単語の間にスペースがありません。そのため、ブラウザは文字ごとに行を折り返す場所を決めます。<strong>漢字、ひらがな、カタカナ</strong>が混ざった文章は、見た目よりもずっと複雑です。たとえば「積ん読」という言葉は、買ったまま読んでいない本のことを指します。中文也是如此：一句话里没有空格，选择文字时每个字符都是一个独立的位置。한국어는 띄어쓰기를 사용하지만, 줄바꿈의 규칙은 또 다릅니다。</p>
+  </div>
+
+  <div class="band">
+    <p class="emoji" id="emoji-para">Emoji are awkward: 🙂 👍🏽 🇬🇧 👨‍👩‍👧‍👦 🏳️‍🌈 are each a single glyph made of several code points, so a character offset that counts UTF-16 units lands in odd places. Try selecting 🌍 across the flags and the faces.</p>
+  </div>
+
+  <div class="band">
+    <p class="justify" id="justify-para">Antidisestablishmentarianism, electroencephalographically and pneumonoultramicroscopic are impressive words to meet in a narrow justified column, because the browser must hyphenate them to avoid enormous gaps between the other words on the line.</p>
+  </div>
+</main>
+</body>
+</html>

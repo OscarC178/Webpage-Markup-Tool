@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hollin &amp; Reed | Ashdown Reading Lamp</title>
+<style>
+  :root { --bg:#faf8f5; --ink:#2a2622; --muted:#7b736a; --line:#e6e0d8; --brand:#3d5a45; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.65 "Helvetica Neue", Arial, sans-serif; padding-bottom:90px; }
+  header { background:#fff; border-bottom:1px solid var(--line); padding:16px 24px; display:flex; justify-content:space-between; }
+  header b { font:700 1.4rem Georgia, serif; color:var(--brand); }
+  .wrap { max-width:1060px; margin:0 auto; padding:24px; }
+  .crumbs { font-size:.85rem; color:var(--muted); margin-bottom:16px; }
+  .product { display:grid; grid-template-columns:1.1fr 1fr; gap:40px; }
+  .gallery .main { background:#efe9df; border-radius:8px; aspect-ratio:1/1; overflow:hidden; }
+  .gallery .main svg { width:100%; height:100%; display:none; }
+  .gallery .main svg.on { display:block; }
+  .thumbs { display:flex; gap:10px; margin-top:10px; }
+  .thumbs button { width:72px; height:72px; border:2px solid transparent; border-radius:6px; background:#efe9df; padding:0; cursor:pointer; overflow:hidden; }
+  .thumbs button.on { border-color:var(--brand); }
+  .thumbs svg { width:100%; height:100%; }
+  h1 { font:700 2rem/1.2 Georgia, serif; margin:0 0 6px; }
+  .price { font-size:1.5rem; font-weight:700; margin:10px 0; }
+  .stars { color:#c98a1a; letter-spacing:2px; }
+  .tabs { margin-top:40px; }
+  .tablist { display:flex; border-bottom:1px solid var(--line); gap:4px; }
+  .tablist button { background:none; border:none; padding:12px 18px; font:600 1rem inherit; cursor:pointer; color:var(--muted); border-bottom:3px solid transparent; }
+  .tablist button[aria-selected="true"] { color:var(--ink); border-bottom-color:var(--brand); }
+  .panel { padding:22px 4px; }
+  .panel[hidden] { display:none; }
+  table.spec { border-collapse:collapse; width:100%; }
+  table.spec th { text-align:left; width:35%; background:#f3eee6; }
+  table.spec th, table.spec td { padding:9px 14px; border:1px solid var(--line); }
+  .acc { border:1px solid var(--line); border-radius:6px; margin-bottom:8px; background:#fff; }
+  .acc button { width:100%; text-align:left; background:none; border:none; padding:14px 18px; font:600 1rem inherit; cursor:pointer; display:flex; justify-content:space-between; }
+  .acc .body { display:none; padding:0 18px 16px; }
+  .acc.open .body { display:block; }
+  .review { border-bottom:1px solid var(--line); padding:14px 0; }
+  .review h4 { margin:0 0 4px; }
+  .review small { color:var(--muted); }
+  .basket-bar { position:fixed; left:0; right:0; bottom:0; z-index:20; background:#fff; border-top:1px solid var(--line); box-shadow:0 -4px 14px rgba(0,0,0,.08); padding:12px 24px; display:flex; align-items:center; justify-content:space-between; }
+  .basket-bar button { background:var(--brand); color:#fff; border:none; padding:12px 28px; border-radius:6px; font:700 1rem inherit; cursor:pointer; }
+  @media (max-width:760px){ .product{grid-template-columns:1fr} }
+  @media print { .basket-bar, .thumbs, header { display:none; } .panel[hidden] { display:block; } body { padding-bottom:0; background:#fff; } }
+</style>
+</head>
+<body>
+<header><b>Hollin &amp; Reed</b><span>Basket (0)</span></header>
+<div class="wrap">
+  <div class="crumbs">Home › Lighting › Reading lamps</div>
+  <div class="product">
+    <div class="gallery">
+      <div class="main" id="gallery-main">
+        <svg class="on" id="img-1" viewBox="0 0 400 400" role="img" aria-label="Lamp, front view"><rect width="400" height="400" fill="#efe9df"/><ellipse cx="200" cy="350" rx="90" ry="14" fill="#cfc6b6"/><rect x="190" y="150" width="20" height="200" fill="#3d5a45"/><path d="M120 150 L160 60 H240 L280 150Z" fill="#e8c46b"/></svg>
+        <svg id="img-2" viewBox="0 0 400 400" role="img" aria-label="Lamp, switched on"><rect width="400" height="400" fill="#2c2a28"/><circle cx="200" cy="140" r="130" fill="#e8c46b" opacity=".25"/><rect x="190" y="150" width="20" height="200" fill="#6b8a73"/><path d="M120 150 L160 60 H240 L280 150Z" fill="#ffd978"/></svg>
+        <svg id="img-3" viewBox="0 0 400 400" role="img" aria-label="Lamp base detail"><rect width="400" height="400" fill="#e4dccd"/><ellipse cx="200" cy="260" rx="130" ry="36" fill="#3d5a45"/><ellipse cx="200" cy="250" rx="130" ry="36" fill="#557a5f"/></svg>
+      </div>
+      <div class="thumbs" id="thumbs">
+        <button class="on" data-img="img-1" aria-label="Show front view"><svg viewBox="0 0 400 400"><rect width="400" height="400" fill="#efe9df"/><rect x="190" y="150" width="20" height="200" fill="#3d5a45"/><path d="M120 150 L160 60 H240 L280 150Z" fill="#e8c46b"/></svg></button>
+        <button data-img="img-2" aria-label="Show lit view"><svg viewBox="0 0 400 400"><rect width="400" height="400" fill="#2c2a28"/><path d="M120 150 L160 60 H240 L280 150Z" fill="#ffd978"/></svg></button>
+        <button data-img="img-3" aria-label="Show base detail"><svg viewBox="0 0 400 400"><rect width="400" height="400" fill="#e4dccd"/><ellipse cx="200" cy="250" rx="130" ry="36" fill="#557a5f"/></svg></button>
+      </div>
+    </div>
+    <div class="info">
+      <h1 id="product-title">The Ashdown Reading Lamp</h1>
+      <div><span class="stars">★★★★☆</span> <small>4.3 from 38 reviews</small></div>
+      <div class="price">£84.00</div>
+      <p id="product-blurb">A tall, slim reading lamp with a pleated linen shade and a base turned from solid ash. It gives a <strong>warm, even light that is kind to tired eyes</strong>, and the weighted foot means it will stay put even when a cat <em>disagrees with its position</em>.</p>
+      <p>Made in small batches in a workshop that, like this shop, is entirely imaginary. Dispatched within three working days. Free returns for thirty days, no questions, only a polite enquiry about what went wrong.</p>
+    </div>
+  </div>
+
+  <section class="tabs">
+    <div class="tablist" role="tablist" id="tablist">
+      <button role="tab" aria-selected="true" data-tab="tab-desc">Description</button>
+      <button role="tab" aria-selected="false" data-tab="tab-spec">Specification</button>
+      <button role="tab" aria-selected="false" data-tab="tab-care">Care &amp; delivery</button>
+      <button role="tab" aria-selected="false" data-tab="tab-reviews">Reviews</button>
+    </div>
+    <div class="panel" id="tab-desc" role="tabpanel">
+      <p id="desc-text">The Ashdown began as a sketch on the back of a seed packet. The designer wanted a lamp that would sit beside an armchair and ask for nothing: no fiddly dimmer, no cold white glare, no cable that insists on tangling itself around a slipper. The result is a single warm setting, a switch you can find in the dark, and a shade whose pleats are <em>folded by hand, one at a time, by someone with remarkable patience</em>.</p>
+      <p>The ash is sourced from managed woodland, finished with a plant-based oil, and left deliberately a little rough so that it ages with the room rather than against it.</p>
+    </div>
+    <div class="panel" id="tab-spec" role="tabpanel" hidden>
+      <table class="spec" id="spec-table" data-test="spec-table">
+        <tr><th>Height</th><td>148 cm</td></tr>
+        <tr><th>Shade diameter</th><td>34 cm</td></tr>
+        <tr><th>Base</th><td>Solid ash, 24 cm diameter, weighted</td></tr>
+        <tr><th>Bulb</th><td>E27, up to 9 W LED (warm white, 2700 K), not included</td></tr>
+        <tr><th>Cable</th><td>2.2 m, fabric-wrapped, inline switch</td></tr>
+        <tr><th>Weight</th><td>3.4 kg</td></tr>
+      </table>
+    </div>
+    <div class="panel" id="tab-care" role="tabpanel" hidden>
+      <div class="acc open" id="acc-1"><button aria-expanded="true">Cleaning the shade <span>–</span></button><div class="body"><p id="acc-1-text">Dust the linen with a soft, dry brush or a lint roller. Never wet the shade, and never use a hairdryer to speed things up. A stain should be dabbed, not rubbed, and then left alone while you think about what you have done.</p></div></div>
+      <div class="acc" id="acc-2"><button aria-expanded="false">Delivery <span>+</span></button><div class="body"><p id="acc-2-text">Standard delivery takes three to five working days and costs £5.50, or nothing on orders over £60. The lamp arrives in recycled packaging, and the packaging is unusually good at being reused.</p></div></div>
+      <div class="acc" id="acc-3"><button aria-expanded="false">Returns <span>+</span></button><div class="body"><p>You have thirty days from delivery to return the lamp in its original box. We will refund the full price once it arrives, usually within a week.</p></div></div>
+    </div>
+    <div class="panel" id="tab-reviews" role="tabpanel" hidden>
+      <ul id="review-list" style="list-style:none;padding:0;margin:0">
+        <li class="review" id="review-1"><h4>Exactly what I wanted <span class="stars">★★★★★</span></h4><small>Gwen T. · verified purchase</small><p id="review-1-text">Sits beside my chair and gives a lovely soft light. The switch is easy to find in the dark, which sounds trivial until you have owned a lamp where it is not. My only complaint is that I now want three more.</p></li>
+        <li class="review" id="review-2"><h4>Lovely, slightly wobbly <span class="stars">★★★★☆</span></h4><small>Raj P. · verified purchase</small><p>Beautiful object. The base rocked a little on my floorboards until I slipped a felt pad under one side, and now it is perfect. Support replied within the hour and were kind about it.</p></li>
+        <li class="review" id="review-3"><h4>The cat approves <span class="stars">★★★★★</span></h4><small>Helen D. · verified purchase</small><p>Our cat sits under it every evening, which I am choosing to regard as a recommendation.</p></li>
+      </ul>
+    </div>
+  </section>
+</div>
+<div class="basket-bar" id="basket-bar" data-test="basket-bar"><span id="basket-text"><strong>The Ashdown Reading Lamp</strong> · £84.00 · in stock, dispatched within 3 days</span><button id="add-btn">Add to basket</button></div>
+<script>
+// Gallery: show one SVG at a time.
+document.getElementById('thumbs').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  document.querySelectorAll('#thumbs button').forEach(x => x.classList.toggle('on', x === b));
+  document.querySelectorAll('#gallery-main svg').forEach(s => s.classList.toggle('on', s.id === b.dataset.img));
+});
+// Tabs: hidden attribute toggles content.
+document.getElementById('tablist').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  document.querySelectorAll('#tablist button').forEach(x => x.setAttribute('aria-selected', x === b));
+  document.querySelectorAll('.panel').forEach(p => p.hidden = p.id !== b.dataset.tab);
+});
+// Accordion.
+document.querySelectorAll('.acc > button').forEach(btn => btn.addEventListener('click', () => {
+  const acc = btn.parentElement; const open = acc.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open); btn.querySelector('span').textContent = open ? '–' : '+';
+}));
+document.getElementById('add-btn').addEventListener('click', () => { document.querySelector('header span').textContent = 'Basket (1)'; });
+</script>
+</body>
+</html>

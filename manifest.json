@@ -1,14 +1,17 @@
 {
   "manifest_version": 3,
   "name": "Web Page Markup Tool",
-  "version": "1.1",
-  "description": "Highlight, underline, and take notes on any webpage.",
+  "version": "2.1",
+  "description": "Highlight, underline and add notes to web pages and PDFs. Your marks are there when you come back, and export to Markdown or PDF.",
+  "minimum_chrome_version": "114",
   "permissions": [
     "activeTab",
-    "scripting",
-    "storage",
-    "clipboardWrite"
+    "storage"
   ],
+  "host_permissions": ["http://*/*", "https://*/*", "file:///*"],
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -17,11 +20,27 @@
       "128": "icons/icon128.png"
     }
   },
+  "commands": {
+    "mark-selection": {
+      "suggested_key": { "default": "Alt+Shift+H" },
+      "description": "Mark the selected text"
+    },
+    "next-note": {
+      "suggested_key": { "default": "Alt+Shift+N" },
+      "description": "Go to the next note on the page"
+    }
+  },
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["content.js"],
-      "css": ["styles.css"]
+      "js": ["lib/url.js", "lib/palette.js", "lib/anchor.js", "ui/styles.js", "content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["pdf-grab.js"],
+      "run_at": "document_idle"
     }
   ],
   "icons": {

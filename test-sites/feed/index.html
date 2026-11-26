@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tideline | Community feed</title>
+<style>
+  :root { --bg:#eef1f5; --card:#fff; --ink:#18202c; --muted:#6a7485; --brand:#d9480f; --line:#dfe3ea; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 system-ui, sans-serif; }
+  header { position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid var(--line); }
+  header .in { max-width:620px; margin:0 auto; padding:12px 16px; display:flex; justify-content:space-between; align-items:center; }
+  header b { color:var(--brand); font-size:1.3rem; }
+  #ticker { font:600 .85rem ui-monospace, Menlo, monospace; background:#18202c; color:#9ef0b8; padding:4px 10px; border-radius:12px; }
+  main { max-width:620px; margin:0 auto; padding:16px; }
+  .post { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin-bottom:14px; }
+  .post .who { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+  .avatar { width:38px; height:38px; border-radius:50%; flex:none; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; }
+  .who small { color:var(--muted); display:block; line-height:1.2; }
+  .post p { margin:0 0 .6em; }
+  .actions { color:var(--muted); font-size:.85rem; border-top:1px solid var(--line); padding-top:8px; }
+  #sentinel { text-align:center; color:var(--muted); padding:20px; }
+</style>
+</head>
+<body>
+<header><div class="in"><b>Tideline</b><span id="ticker" data-test="ticker">Online now: 0 · tick 0</span></div></header>
+<main>
+  <section id="feed" data-test="feed">
+    <article class="post" id="post-1" data-test="post-first">
+      <div class="who"><span class="avatar" style="background:#d9480f">AB</span><div><strong>Aoife Brannock</strong><small>@aoife · 2 minutes ago</small></div></div>
+      <p id="post-1-text">Spent the whole morning repainting the allotment shed in a shade the tin called <em>"Barley Mist"</em>. It is, to be frank, <strong>exactly the colour of porridge</strong>, but the tomatoes seem to approve and that is all that matters.</p>
+      <div class="actions">12 likes · 3 replies</div>
+    </article>
+    <article class="post" id="post-2">
+      <div class="who"><span class="avatar" style="background:#1971c2">KO</span><div><strong>Kwame Osei</strong><small>@kwame · 9 minutes ago</small></div></div>
+      <p id="post-2-text">Reminder that the village hall quiz starts at <strong>seven thirty</strong>, not eight, whatever the poster says. Last month's winners, the Quizzy Rascals, have been asked to share the trophy. They have declined.</p>
+      <div class="actions">31 likes · 9 replies</div>
+    </article>
+    <article class="post" id="post-3">
+      <div class="who"><span class="avatar" style="background:#2b8a3e">LM</span><div><strong>Lucia Marchetti</strong><small>@lucia · 21 minutes ago</small></div></div>
+      <p id="post-3-text">Lost: one grey cardigan, left on the number 14 bus. It has a button missing and a faint smell of lavender. Sentimental value only, but considerable.</p>
+      <div class="actions">4 likes · 1 reply</div>
+    </article>
+  </section>
+  <div id="sentinel">Loading more…</div>
+</main>
+<script>
+/* Infinite scroll: an IntersectionObserver watches #sentinel and appends a batch of posts each time it is reached.
+   A ticker in the header mutates once a second (characterData + text node replacement), to stress MutationObservers. */
+const names = [['Dermot Finch','DF','#862e9c'],['Priya Nair','PN','#c2255c'],['Sven Holm','SH','#0b7285'],['Olamide Bello','OB','#e8590c'],['Hattie Pryce','HP','#5f3dc4'],['Ivor Quill','IQ','#364fc7']];
+const lines = [
+  'The tide came in a full twenty minutes early today and took my deckchair with it. If anyone finds a striped chair near the groyne, it is <strong>probably mine</strong>, and it is probably very annoyed.',
+  'Made a <em>enormous</em> pan of leek and potato soup and now have enough to feed the whole street. Knock if you want some. Bring a bowl, not a spoon, you will want to take it home.',
+  'Does anybody else think the new bins are <strong>far too tall</strong> for anyone under five foot six? Asking for a friend who is five foot four and has opinions.',
+  'Heron on the canal again this morning, standing perfectly still, <em>judging</em> everyone. I have never felt so thoroughly assessed by a bird.',
+  'The library is running a swap shelf for jigsaws. I have taken one with a thousand pieces and, I am told, <strong>at least two of them are from a different puzzle</strong>.',
+  'Fog so thick on the hill road that I followed a cyclist for a mile before realising it was a very tall hedge with a reflector on it.'
+];
+let n = 3, tick = 0, loading = false;
+const feed = document.getElementById('feed');
+
+function addBatch(count = 4) {
+  for (let i = 0; i < count; i++) {
+    n++;
+    const [name, ini, col] = names[n % names.length];
+    const art = document.createElement('article');
+    art.className = 'post';
+    art.id = 'post-' + n;
+    art.innerHTML = `<div class="who"><span class="avatar" style="background:${col}">${ini}</span><div><strong>${name}</strong><small>@${name.split(' ')[0].toLowerCase()} · ${n * 7} minutes ago</small></div></div>
+      <p id="post-${n}-text">${lines[n % lines.length]}</p><div class="actions">${n % 17} likes · ${n % 5} replies</div>`;
+    feed.appendChild(art);
+  }
+}
+const io = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting && !loading) {
+    loading = true;
+    setTimeout(() => { addBatch(); loading = false; }, 250);
+  }
+}, { rootMargin: '300px' });
+io.observe(document.getElementById('sentinel'));
+
+// Live ticker: replaces its text every second.
+const ticker = document.getElementById('ticker');
+setInterval(() => {
+  tick++;
+  ticker.textContent = `Online now: ${120 + (tick * 7) % 53} · tick ${tick}`;
+}, 1000);
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marlowe Bikes | Single-page app</title>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --ink:#1d2433; --muted:#667085; --brand:#2f6f4f; --line:#e3e6ec; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.65 system-ui, sans-serif; }
+  header { background:var(--brand); color:#fff; }
+  header .in { max-width:960px; margin:0 auto; padding:14px 20px; display:flex; justify-content:space-between; align-items:center; }
+  header .logo { font-weight:800; font-size:1.3rem; letter-spacing:.02em; }
+  header nav a { color:#e8f3ec; text-decoration:none; margin-left:18px; padding-bottom:3px; cursor:pointer; }
+  header nav a.active { color:#fff; border-bottom:2px solid #fff; }
+  main { max-width:960px; margin:0 auto; padding:28px 20px 80px; min-height:70vh; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:22px 26px; margin-bottom:18px; }
+  .loading { color:var(--muted); font-style:italic; }
+  h1 { margin-top:0; } h2 { margin-top:1.4em; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+  .route-meta { font-size:.8rem; color:var(--muted); }
+</style>
+</head>
+<body>
+<header><div class="in"><span class="logo">Marlowe Bikes</span>
+  <nav id="nav"><a data-route="home" href="?view=home">Home</a><a data-route="routes" href="?view=routes">Routes</a><a data-route="workshop" href="?view=workshop">Workshop</a><a data-route="about" href="?view=about">About</a></nav></div></header>
+<main id="app" data-test="app"><p class="loading">Loading…</p></main>
+
+<script>
+/* Tiny client-side router. URLs look like index.html?view=routes and are changed with history.pushState,
+   so there is no reload. Content is rendered ~300 ms after each navigation to mimic a data fetch. */
+const views = {
+  home: () => `
+    <section class="card" id="view-home">
+      <h1 id="home-title">Ride more, worry less</h1>
+      <p id="home-intro">Marlowe Bikes is a small, entirely fictional cycling cooperative based in a converted tram depot. We repair, rent and occasionally rescue bicycles, and we run guided rides on the quieter lanes of the county every weekend from March to October.</p>
+      <p id="home-inline">Whether you want a <strong>sturdy commuter that survives <em>potholes, rain and enthusiastic dogs</em></strong> or simply someone to show you how to fix a puncture without crying, our <a href="?view=workshop" data-route="workshop">workshop</a> has a stool with your name on it.</p>
+    </section>
+    <div class="grid">
+      <div class="card"><h2 style="margin-top:0">Guided rides</h2><p>Every Saturday at nine, a leisurely thirty miles with a cake stop at the halfway point.</p></div>
+      <div class="card"><h2 style="margin-top:0">Hire</h2><p>Hybrids, tourers and a single, much-loved tandem called Doris.</p></div>
+    </div>`,
+  routes: () => `
+    <section class="card" id="view-routes">
+      <h1>Routes</h1>
+      <p id="routes-intro">All of our rides follow quiet lanes, canal towpaths and disused railway lines. Each route is graded for effort rather than speed, because nobody has ever enjoyed a hill more by being told it was fast.</p>
+      <h2>The Tramway Loop</h2>
+      <p id="routes-loop">Twelve miles, almost entirely flat, following the old tramway out past the reservoir and back along the canal. It suits beginners, families with small children and anyone recovering from a long winter on the sofa. The café at the reservoir does a flapjack that has become locally notorious.</p>
+      <h2>The Three Churches</h2>
+      <p>Twenty-six miles with two proper climbs and a descent that rewards patience. The route links three village churches, none of which is particularly interested in cyclists, but all of which have excellent benches.</p>
+    </section>`,
+  workshop: () => `
+    <section class="card" id="view-workshop">
+      <h1>Workshop</h1>
+      <p id="workshop-intro">Our mechanics repair any bicycle that arrives with two wheels and a sense of optimism. Most jobs are finished within two working days, and we will tell you honestly if a repair costs more than the bike is worth.</p>
+      <p id="workshop-inline">Prices start at <strong>£12 for a puncture</strong>, <em>£45 for a full service</em>, and <a href="?view=about" data-route="about">a free cup of tea</a> if you stay and watch.</p>
+    </section>`,
+  about: () => `
+    <section class="card" id="view-about">
+      <h1>About the cooperative</h1>
+      <p id="about-intro">Marlowe Bikes was founded by six friends who were tired of paying large sums to be told their gears were "just a bit tired". We are owned by our members, any of whom can attend the monthly meeting and argue about the biscuits.</p>
+      <p>We reinvest everything into the workshop and the free youth rides, which have so far taught over four hundred children to fix their own punctures. Several of them now give lessons to adults.</p>
+    </section>`
+};
+
+const app = document.getElementById('app');
+let current = null;
+
+function routeFromUrl() {
+  const v = new URLSearchParams(location.search).get('view');
+  return views[v] ? v : 'home';
+}
+
+function render(route) {
+  current = route;
+  document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('active', a.dataset.route === route));
+  app.innerHTML = '<p class="loading">Loading…</p>';
+  // Simulated fetch delay: the content genuinely arrives late.
+  setTimeout(() => {
+    if (current !== route) return;
+    app.innerHTML = views[route]() + `<p class="route-meta" id="route-meta">Rendered view: ${route}</p>`;
+    document.title = 'Marlowe Bikes | ' + route;
+    app.dataset.route = route;
+    app.dataset.ready = 'true';
+  }, 300);
+  delete app.dataset.ready;
+}
+
+function navigate(route) {
+  history.pushState({ route }, '', '?view=' + route);   // URL changes, page does not reload
+  render(route);
+}
+
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[data-route]');
+  if (!a) return;
+  e.preventDefault();
+  navigate(a.dataset.route);
+});
+window.addEventListener('popstate', () => render(routeFromUrl()));
+render(routeFromUrl());
+</script>
+</body>
+</html>

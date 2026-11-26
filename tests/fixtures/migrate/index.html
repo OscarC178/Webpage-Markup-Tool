@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Harness fixture: migration page</title>
+<style>body { font-family: Georgia, serif; max-width: 640px; margin: 40px auto; line-height: 1.6; padding: 0 20px; }</style>
+</head>
+<body>
+  <!-- Used by the migration check (t): version 1 data pointing at this text is seeded into storage
+       before the extension starts, and must come back as version 2 markups. Do not change the wording
+       or the ids without updating V1_SEED in tests/checks.js. -->
+  <h1>Old markups should survive the upgrade</h1>
+  <p id="m1">The harbour wall was rebuilt in 1911 after the great storm took most of it away.</p>
+  <p id="m2">Fishing boats still tie up there every evening, although far fewer than before.</p>
+  <p id="m3">A brass plate near the steps records the names of the men who laid the stone.</p>
+</body>
+</html>

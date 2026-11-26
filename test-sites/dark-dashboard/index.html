@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nightwatch Analytics | Overview</title>
+<style>
+  :root { --bg:#0b0d12; --panel:#141821; --line:#232a38; --ink:#e6e9ef; --muted:#8b94a7; --accent:#5eead4; --warn:#fbbf24; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.6 system-ui, sans-serif; }
+  .sidebar { position:fixed; top:0; left:0; bottom:0; width:220px; background:#0f1219; border-right:1px solid var(--line); padding:20px 14px; z-index:30; }
+  .sidebar h2 { font-size:1.1rem; color:var(--accent); margin:0 0 22px; }
+  .sidebar a { display:block; color:var(--muted); text-decoration:none; padding:8px 10px; border-radius:6px; margin-bottom:2px; }
+  .sidebar a.on, .sidebar a:hover { background:#1a2030; color:var(--ink); }
+  .sidebar p { position:absolute; bottom:16px; left:14px; right:14px; font-size:.78rem; color:var(--muted); margin:0; }
+  main { margin-left:220px; padding:26px 32px 80px; }
+  h1 { margin:0 0 4px; font-size:1.6rem; }
+  .sub { color:var(--muted); margin:0 0 22px; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-bottom:22px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:16px 18px; }
+  .card .label { color:var(--muted); font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; }
+  .card .num { font-size:2rem; font-weight:700; margin:4px 0; }
+  .card .delta { color:var(--accent); font-size:.85rem; } .card .delta.down { color:var(--warn); }
+  .row { display:grid; grid-template-columns:2fr 1fr; gap:16px; }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:18px 20px; }
+  .panel h3 { margin:0 0 10px; font-size:1.05rem; }
+  .scroller { height:260px; overflow:auto; border:1px solid var(--line); border-radius:6px; padding:12px 16px; background:#10131b; }
+  .scroller p { margin:0 0 .9em; }
+  table { width:100%; border-collapse:collapse; margin-top:10px; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); }
+  th { color:var(--muted); font-weight:600; font-size:.8rem; text-transform:uppercase; }
+  a { color:var(--accent); }
+  .spark { width:100%; height:80px; }
+  @media (max-width:860px){ .row{grid-template-columns:1fr} }
+  .hot { color:#ffe600; font-weight:600; } .bad { color:#ff4d4d; font-weight:600; }
+  @media print { .sidebar { display:none; } main { margin-left:0; } body { background:#fff; color:#000; } .card, .panel, .scroller { background:#fff; border-color:#000; } .scroller { height:auto; overflow:visible; } .hot, .bad, a { color:#000; } }
+</style>
+</head>
+<body>
+<nav class="sidebar" id="sidebar" data-test="sidebar">
+  <h2>Nightwatch</h2>
+  <a class="on" href="#">Overview</a><a href="#">Audiences</a><a href="#">Funnels</a><a href="#">Reports</a><a href="#">Alerts</a><a href="#">Settings</a>
+  <p id="sidebar-note">Workspace: <strong>Lantern Studio</strong>. Data refreshed 04:10 GMT. All figures are invented.</p>
+</nav>
+<main>
+  <h1 id="dash-title">Weekly overview</h1>
+  <p class="sub" id="dash-sub">Traffic, sign-ups and support load for the week ending Sunday 9 March. <span class="hot" id="warn-yellow">Yellow: two alerts are awaiting review.</span> <span class="bad" id="warn-red">Red: one alert is critical.</span></p>
+  <div class="cards">
+    <div class="card"><div class="label">Visitors</div><div class="num">48,210</div><div class="delta">▲ 6.2% on last week</div></div>
+    <div class="card"><div class="label">Sign-ups</div><div class="num">1,302</div><div class="delta">▲ 2.8%</div></div>
+    <div class="card"><div class="label">Churn</div><div class="num">2.1%</div><div class="delta down">▼ 0.3 points worse</div></div>
+    <div class="card"><div class="label">Median load</div><div class="num">1.4 s</div><div class="delta">▲ faster by 90 ms</div></div>
+  </div>
+  <div class="row">
+    <div class="panel">
+      <h3>Visitors by day</h3>
+      <svg class="spark" viewBox="0 0 400 80" preserveAspectRatio="none"><polyline fill="none" stroke="#5eead4" stroke-width="2" points="0,60 60,50 120,55 180,30 240,38 300,20 360,26 400,12"/></svg>
+      <p id="card-summary">Traffic <strong>climbed steadily through the week</strong>, peaking on Saturday after the <em>spring newsletter</em> went out. Weekday mornings remain the quietest period, which is useful to know before scheduling maintenance.</p>
+    </div>
+    <div class="panel">
+      <h3>Incident notes</h3>
+      <div class="scroller" id="scroller" data-test="scroller">
+        <p id="scroll-first">Monday 03:12. A certificate on the image proxy expired without warning, and for about eleven minutes the product pages loaded without pictures. Nobody was woken, because the alert was routed to a mailbox that nobody has read since the spring reorganisation. The routing has since been corrected.</p>
+        <p>Tuesday 14:40. A deployment to the search service doubled median latency for roughly half an hour. The cause was an index that had been rebuilt with the wrong analyser, so every query for a plural noun was also searching for the singular. It was fast to fix and slow to understand.</p>
+        <p>Wednesday 09:05. The weekly export to finance failed because a column called <em>region</em> had been renamed to <em>area</em> by someone who was, by all accounts, having a perfectly reasonable morning. The export was re-run by hand.</p>
+        <p>Thursday 22:18. A burst of traffic from a link on a gardening forum briefly tripled the number of visitors per minute. The system coped. The gardeners, we are told, were looking for a recipe for rhubarb gin.</p>
+        <p id="scroll-bottom">Friday 11:30. No incidents. The team used the quiet to delete forty-one dashboards that nobody could remember creating, and to write the first draft of a runbook for expired certificates. It is, for now, three lines long, and the first line is "check the date".</p>
+        <p>Saturday 06:00. A scheduled backup ran for four minutes longer than usual and then finished. Nobody has been able to say why, and nobody is willing to say that it was a coincidence.</p>
+      </div>
+    </div>
+  </div>
+  <div class="panel" style="margin-top:16px">
+    <h3>Top pages</h3>
+    <table id="top-pages">
+      <thead><tr><th>Page</th><th>Views</th><th>Avg. time</th></tr></thead>
+      <tbody>
+        <tr><td>/pricing</td><td>9,412</td><td>1m 48s</td></tr>
+        <tr><td>/docs/getting-started</td><td>7,880</td><td>4m 02s</td></tr>
+        <tr><td>/blog/lantern-release-notes</td><td>5,106</td><td>2m 31s</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:14px">Questions about these figures? Read the <a href="#">methodology note</a> or ask in the analytics channel.</p>
+  </div>
+  <div style="height:700px"></div>
+</main>
+</body>
+</html>

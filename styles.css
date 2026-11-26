@@ -1,73 +1,67 @@
 /**
- * Toolbar Style
+ * styles.css
+ * Page-level rules for the markups themselves. Nothing else lives here: the
+ * toolbar, note cards and other controls are styled inside a sealed shadow
+ * root (ui/styles.js), so they cannot affect the page or be affected by it.
+ *
+ * Markups are painted with the CSS Custom Highlight API. These rules do
+ * nothing until the extension registers a range under one of these names, and
+ * they only paint: no element is added to the page and no text can move.
+ *
+ * Names: wmt-{hl|ul}-{colour}-{variant}
+ *   hl ...-l   light-page fill, the page's own text colour kept
+ *   hl ...-lf  light-page fill, text forced dark (page text would be unreadable)
+ *   hl ...-lc  light-page fill plus an underline, for when the fill nearly matches the page
+ *   hl ...-d   dark-page fill, the page's own text colour kept
+ *   hl ...-df  dark-page fill, text forced white
+ *   ul ...-l   underline for light pages
+ *   ul ...-d   underline for dark pages
+ * Colours must match lib/palette.js.
  */
-#markup-toolbar {
-  position: absolute;
-  z-index: 99999;
-  background-color: #282828;
-  border-radius: 6px;
-  padding: 5px;
-  display: flex;
-  gap: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-
-#markup-toolbar button {
-  background-color: #444;
-  color: white;
-  font-family: sans-serif;
-  font-size: 14px;
-  border: none;
-  padding: 6px 12px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
-#markup-toolbar button:hover {
-  background-color: #666;
-}
-
-/**
- * Markup Styles for the OVERLAY
+::highlight(wmt-hl-yellow-l)  { background-color: #FFE566; }
+::highlight(wmt-hl-yellow-lf) { background-color: #FFE566; color: #1B1B1F; }
+::highlight(wmt-hl-yellow-lc) { background-color: #FFE566; color: #1B1B1F; text-decoration: underline 2px #B58900; text-underline-offset: 2px; }
+::highlight(wmt-hl-yellow-d)  { background-color: #806600; }
+::highlight(wmt-hl-yellow-df) { background-color: #806600; color: #FFFFFF; }
+::highlight(wmt-ul-yellow-l)  { text-decoration: underline 2px #B58900; text-underline-offset: 2px; }
+::highlight(wmt-ul-yellow-d)  { text-decoration: underline 2px #FFE566; text-underline-offset: 2px; }
+::highlight(wmt-hl-green-l)  { background-color: #A8E6A1; }
+::highlight(wmt-hl-green-lf) { background-color: #A8E6A1; color: #1B1B1F; }
+::highlight(wmt-hl-green-lc) { background-color: #A8E6A1; color: #1B1B1F; text-decoration: underline 2px #2E9E44; text-underline-offset: 2px; }
+::highlight(wmt-hl-green-d)  { background-color: #2F7D3B; }
+::highlight(wmt-hl-green-df) { background-color: #2F7D3B; color: #FFFFFF; }
+::highlight(wmt-ul-green-l)  { text-decoration: underline 2px #2E9E44; text-underline-offset: 2px; }
+::highlight(wmt-ul-green-d)  { text-decoration: underline 2px #A8E6A1; text-underline-offset: 2px; }
+::highlight(wmt-hl-blue-l)  { background-color: #A5D4FF; }
+::highlight(wmt-hl-blue-lf) { background-color: #A5D4FF; color: #1B1B1F; }
+::highlight(wmt-hl-blue-lc) { background-color: #A5D4FF; color: #1B1B1F; text-decoration: underline 2px #2F7FE0; text-underline-offset: 2px; }
+::highlight(wmt-hl-blue-d)  { background-color: #2C6CC4; }
+::highlight(wmt-hl-blue-df) { background-color: #2C6CC4; color: #FFFFFF; }
+::highlight(wmt-ul-blue-l)  { text-decoration: underline 2px #2F7FE0; text-underline-offset: 2px; }
+::highlight(wmt-ul-blue-d)  { text-decoration: underline 2px #A5D4FF; text-underline-offset: 2px; }
+::highlight(wmt-hl-pink-l)  { background-color: #FFB3D1; }
+::highlight(wmt-hl-pink-lf) { background-color: #FFB3D1; color: #1B1B1F; }
+::highlight(wmt-hl-pink-lc) { background-color: #FFB3D1; color: #1B1B1F; text-decoration: underline 2px #E0408A; text-underline-offset: 2px; }
+::highlight(wmt-hl-pink-d)  { background-color: #B8336F; }
+::highlight(wmt-hl-pink-df) { background-color: #B8336F; color: #FFFFFF; }
+::highlight(wmt-ul-pink-l)  { text-decoration: underline 2px #E0408A; text-underline-offset: 2px; }
+::highlight(wmt-ul-pink-d)  { text-decoration: underline 2px #FFB3D1; text-underline-offset: 2px; }
+::highlight(wmt-hl-purple-l)  { background-color: #D4BBFF; }
+::highlight(wmt-hl-purple-lf) { background-color: #D4BBFF; color: #1B1B1F; }
+::highlight(wmt-hl-purple-lc) { background-color: #D4BBFF; color: #1B1B1F; text-decoration: underline 2px #8E5CE6; text-underline-offset: 2px; }
+::highlight(wmt-hl-purple-d)  { background-color: #7448C9; }
+::highlight(wmt-hl-purple-df) { background-color: #7448C9; color: #FFFFFF; }
+::highlight(wmt-ul-purple-l)  { text-decoration: underline 2px #8E5CE6; text-underline-offset: 2px; }
+::highlight(wmt-ul-purple-d)  { text-decoration: underline 2px #D4BBFF; text-underline-offset: 2px; }
+/*
+ * Print and "Save as PDF". Highlight fills print even when "Background
+ * graphics" is off (checked in Chromium 158), and this thin underline keeps a
+ * mark visible on black-and-white printers.
  */
-.markup--highlight {
-  mix-blend-mode: multiply;
-}
-
-.markup--underline {
-  /* Style is set in content.js */
-}
-
-/**
- * NEW: Sticky Note Styles
- */
-.markup-sticky-note {
-  position: absolute;
-  width: 180px;
-  height: 180px;
-  padding: 10px;
-  background-color: #FFF888;
-  border: 1px solid #E4E59A;
-  box-shadow: 2px 4px 10px rgba(0,0,0,0.2);
-  font-family: "Kalam", cursive, sans-serif;
-  font-size: 14px;
-  color: #333;
-  z-index: 10000;
-  resize: both;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.markup-sticky-note textarea {
-  flex-grow: 1;
-  border: none;
-  background-color: transparent;
-  resize: none;
-  outline: none;
-  font-family: inherit;
-  font-size: inherit;
-  color: inherit;
-  padding: 8px;
+@media print {
+  ::highlight(wmt-hl-yellow-lf) { text-decoration: underline 1px #B58900; text-underline-offset: 2px; }
+  ::highlight(wmt-hl-green-lf) { text-decoration: underline 1px #2E9E44; text-underline-offset: 2px; }
+  ::highlight(wmt-hl-blue-lf) { text-decoration: underline 1px #2F7FE0; text-underline-offset: 2px; }
+  ::highlight(wmt-hl-pink-lf) { text-decoration: underline 1px #E0408A; text-underline-offset: 2px; }
+  ::highlight(wmt-hl-purple-lf) { text-decoration: underline 1px #8E5CE6; text-underline-offset: 2px; }
 }
