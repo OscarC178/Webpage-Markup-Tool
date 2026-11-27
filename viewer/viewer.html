@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <title>PDF · Web Page Markup Tool</title>
+  <!-- pdf.js page styles (text layer, page boxes), then our marks, then this viewer's own layout. -->
+  <link rel="stylesheet" href="../vendor/pdfjs/web/pdf_viewer.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="viewer.css">
+</head>
+<body>
+  <header id="bar" role="toolbar" aria-label="PDF viewer">
+    <span id="docTitle" class="title">Loading…</span>
+    <span class="group">
+      <label for="pageNumber" class="sr-only">Page</label>
+      <input id="pageNumber" type="number" min="1" value="1" inputmode="numeric">
+      <span id="pageCount" class="muted">of –</span>
+    </span>
+    <span class="group">
+      <button id="zoomOut" type="button" aria-label="Zoom out">−</button>
+      <button id="zoomFit" type="button">Fit width</button>
+      <button id="zoomIn" type="button" aria-label="Zoom in">+</button>
+    </span>
+    <span class="group">
+      <button id="printBtn" type="button">Print or save PDF</button>
+      <label class="btn" id="pickLabel">Open a file…<input id="pick" type="file" accept="application/pdf,.pdf" hidden></label>
+      <a id="nativeLink" href="#" hidden>Open in Chrome's viewer</a>
+    </span>
+  </header>
+
+  <p id="message" role="status" aria-live="polite" hidden></p>
+
+  <!-- Printed instead of the document when Chrome's own menu Print is used
+       (it cannot be intercepted, so the pages are not ready; see viewer.js). -->
+  <div id="printNotice">
+    <h1>This PDF was not ready to print</h1>
+    <p>Chrome's own Print menu prints only what is on the screen, so it cannot print this PDF properly.</p>
+    <p>Close this window, then use <strong>Print or save PDF</strong> in the bar at the top of the viewer, or press <strong>Ctrl+P</strong>. That prints every page, with your highlights, underlines and notes.</p>
+  </div>
+
+  <!-- pdf.js needs an absolutely positioned scrolling container whose first child is the viewer. -->
+  <div id="viewerContainer">
+    <div id="viewer" class="pdfViewer"></div>
+  </div>
+
+  <!-- The extension's own marking code, the same files the manifest injects into web pages. -->
+  <script src="../lib/url.js"></script>
+  <script src="../lib/palette.js"></script>
+  <script src="../lib/anchor.js"></script>
+  <script src="../ui/styles.js"></script>
+  <script src="host.js"></script>
+  <script src="../content.js"></script>
+  <!-- pdf.js and the glue that drives it. -->
+  <script type="module" src="viewer.js"></script>
+</body>
+</html>

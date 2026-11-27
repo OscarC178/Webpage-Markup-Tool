@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edge Cases | Awkward DOM test page</title>
+<style>
+  /* Deliberate body offsets: margin plus position:relative, so absolute overlay coordinates need care. */
+  body { margin:60px 40px 0 120px; position:relative; top:15px; font:16px/1.6 Georgia, serif; color:#222; background:#fdfcf9; max-width:760px; }
+  h1 { margin-top:0; }
+  section { margin-bottom:36px; padding:14px 18px; border:1px solid #e3ddd0; background:#fff; border-radius:6px; }
+  h2 { margin-top:0; font-size:1.2rem; font-family:system-ui, sans-serif; }
+  #xform-wrap { height:180px; }
+  #xform { transform:rotate(-4deg) scale(.9); transform-origin:left top; width:420px; background:#eef5ff; padding:10px 14px; border:1px solid #9bb7e0; }
+  #wide-scroll { overflow-x:auto; border:1px solid #ccc; max-width:100%; }
+  #wide-table { border-collapse:collapse; width:1800px; }
+  #wide-table th, #wide-table td { border:1px solid #ddd; padding:6px 10px; white-space:nowrap; }
+  #nosel { user-select:none; -webkit-user-select:none; background:#f6e9e9; padding:10px 14px; }
+  .fill { margin:0 0 1em; }
+  #late { background:#fff7d6; padding:10px 14px; }
+</style>
+</head>
+<body>
+<h1>Edge cases</h1>
+<p id="edge-intro">This page is deliberately awkward. It contains <strong>unusual identifiers</strong>, duplicate ids, transformed text, horizontal scrolling, SVG text, unselectable text, text that is replaced by script, and a long tail of filler so that the page is well over four thousand pixels tall.</p>
+
+<section>
+  <h2>Odd identifiers</h2>
+  <p id='say "hello"' data-test="id-dquote">This paragraph's id contains a double quotation mark, which breaks naive XPath strings of the form <code>//*[@id="..."]</code>, because the quotes no longer balance.</p>
+  <p id="it's-here" data-test="id-apostrophe">This paragraph's id contains an apostrophe. In an XPath written with single quotes that would be the problem; in one written with double quotes it is fine, which is rather the point.</p>
+  <p id="dupe" data-test="dupe-first">First paragraph with the duplicate id. An XPath of <code>//*[@id="dupe"]</code> returns whichever the browser finds first, so a selection in the second one may be re-anchored into this one.</p>
+  <p id="dupe" data-test="dupe-second">Second paragraph with the very same id. Text in here should be highlighted in here, not in its twin above.</p>
+</section>
+
+<section>
+  <h2>Transformed text</h2>
+  <div id="xform-wrap"><div id="xform" data-test="xform">This block is rotated four degrees anticlockwise and scaled to ninety per cent. Its client rectangles are the bounding boxes of the transformed lines, so <em>highlight rectangles are axis-aligned</em> and will not match the slant of the text exactly.</div></div>
+</section>
+
+<section>
+  <h2>Wide table</h2>
+  <div id="wide-scroll" data-test="wide-scroll">
+    <table id="wide-table">
+      <thead><tr><th>Station</th><th>Opened</th><th>Platforms</th><th>Closed</th><th>Notes</th><th>Nearest pub</th><th>Rumoured ghost</th><th>Final timetable entry</th></tr></thead>
+      <tbody>
+        <tr><td>Little Marsham</td><td>1869</td><td>2</td><td>1964</td><td>Bypassed by the main line</td><td>The Signal Box</td><td>A porter, politely</td><td>Last train 22:14, usually late</td></tr>
+        <tr><td>Great Hallow</td><td>1872</td><td>1</td><td>1962</td><td>Now a garden centre</td><td>The Plough</td><td>None, but a lot of ferns</td><td>Last train 21:50</td></tr>
+        <tr><td>Penhallow Road</td><td>1881</td><td>3</td><td>—</td><td>Still open, against expectation</td><td>The Tunnel</td><td>An inspector</td><td>Last train 23:40</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>SVG text</h2>
+  <svg id="svg-box" data-test="svg-box" width="520" height="90" viewBox="0 0 520 90" role="img" aria-label="Sign">
+    <rect width="520" height="90" fill="#1c3b5a"/>
+    <text id="svg-text" data-test="svg-text" x="20" y="40" fill="#fff" font-family="Georgia, serif" font-size="22">Welcome to <tspan font-weight="700">Little Marsham</tspan></text>
+    <text x="20" y="70" fill="#9fc3e8" font-family="Georgia, serif" font-size="15">Please drive carefully. Ducks have right of way.</text>
+  </svg>
+</section>
+
+<section>
+  <h2>Unselectable text</h2>
+  <p id="nosel" data-test="nosel">This paragraph has user-select set to none. The browser will not let you select it by dragging, so the extension should simply see no selection here.</p>
+  <p id="selectable-after" data-test="selectable-after">This paragraph directly after it is perfectly ordinary and can be selected as normal. Dragging from here upwards across the previous paragraph should select only this part.</p>
+</section>
+
+<section>
+  <h2>Text that changes</h2>
+  <p id="late" data-test="late">Original wording: this sentence will be replaced by script two seconds after the page loads. Anything marked before then will lose its anchor.</p>
+</section>
+
+<section>
+  <h2>The long tail</h2>
+<p class="fill" id="fill-1">Surveyors of the period tended to describe landscape in terms of what was wrong with it. A hill was never simply a hill; it was a hill that would be difficult to drain. A river was a river that had opinions about property boundaries. It makes their reports a pleasure to read, if not to act on.</p>
+<p class="fill" id="fill-2">Modern readers sometimes assume that the past was quieter. The archive suggests otherwise. There are petitions about church bells, complaints about geese, and a long, bitter dispute over who had the right to cut the reeds on a pond that has since been drained and built over by a petrol station.</p>
+<p class="fill" id="fill-3">What survives is a kind of accidental portrait: a community defined less by its great events than by its small, persistent irritations. If you want to know what a place was like, do not ask what happened there. Ask what people wrote to the council about.</p>
+<p class="fill" id="fill-4">The county archive keeps, in a cellar that smells faintly of apples, a box of letters that nobody has ever catalogued. They are mostly about drains. One correspondent, writing in 1894, complains for eleven pages about a culvert, and the reply, which is also in the box, is a single line thanking him for his interest.</p>
+<p class="fill" id="fill-5">Surveyors of the period tended to describe landscape in terms of what was wrong with it. A hill was never simply a hill; it was a hill that would be difficult to drain. A river was a river that had opinions about property boundaries. It makes their reports a pleasure to read, if not to act on.</p>
+<p class="fill" id="fill-6">Modern readers sometimes assume that the past was quieter. The archive suggests otherwise. There are petitions about church bells, complaints about geese, and a long, bitter dispute over who had the right to cut the reeds on a pond that has since been drained and built over by a petrol station.</p>
+<p class="fill" id="fill-7">What survives is a kind of accidental portrait: a community defined less by its great events than by its small, persistent irritations. If you want to know what a place was like, do not ask what happened there. Ask what people wrote to the council about.</p>
+<p class="fill" id="fill-8">The county archive keeps, in a cellar that smells faintly of apples, a box of letters that nobody has ever catalogued. They are mostly about drains. One correspondent, writing in 1894, complains for eleven pages about a culvert, and the reply, which is also in the box, is a single line thanking him for his interest.</p>
+<p class="fill" id="fill-9">Surveyors of the period tended to describe landscape in terms of what was wrong with it. A hill was never simply a hill; it was a hill that would be difficult to drain. A river was a river that had opinions about property boundaries. It makes their reports a pleasure to read, if not to act on.</p>
+<p class="fill" id="fill-10">Modern readers sometimes assume that the past was quieter. The archive suggests otherwise. There are petitions about church bells, complaints about geese, and a long, bitter dispute over who had the right to cut the reeds on a pond that has since been drained and built over by a petrol station.</p>
+<p class="fill" id="fill-11">What survives is a kind of accidental portrait: a community defined less by its great events than by its small, persistent irritations. If you want to know what a place was like, do not ask what happened there. Ask what people wrote to the council about.</p>
+<p class="fill" id="fill-12">The county archive keeps, in a cellar that smells faintly of apples, a box of letters that nobody has ever catalogued. They are mostly about drains. One correspondent, writing in 1894, complains for eleven pages about a culvert, and the reply, which is also in the box, is a single line thanking him for his interest.</p>
+<p class="fill" id="fill-13">Surveyors of the period tended to describe landscape in terms of what was wrong with it. A hill was never simply a hill; it was a hill that would be difficult to drain. A river was a river that had opinions about property boundaries. It makes their reports a pleasure to read, if not to act on.</p>
+<p class="fill" id="fill-14">Modern readers sometimes assume that the past was quieter. The archive suggests otherwise. There are petitions about church bells, complaints about geese, and a long, bitter dispute over who had the right to cut the reeds on a pond that has since been drained and built over by a petrol station.</p>
+<p class="fill" id="fill-15">What survives is a kind of accidental portrait: a community defined less by its great events than by its small, persistent irritations. If you want to know what a place was like, do not ask what happened there. Ask what people wrote to the council about.</p>
+<p class="fill" id="fill-16">The county archive keeps, in a cellar that smells faintly of apples, a box of letters that nobody has ever catalogued. They are mostly about drains. One correspondent, writing in 1894, complains for eleven pages about a culvert, and the reply, which is also in the box, is a single line thanking him for his interest.</p>
+<p class="fill" id="fill-17">Surveyors of the period tended to describe landscape in terms of what was wrong with it. A hill was never simply a hill; it was a hill that would be difficult to drain. A river was a river that had opinions about property boundaries. It makes their reports a pleasure to read, if not to act on.</p>
+<p class="fill" id="fill-18">Modern readers sometimes assume that the past was quieter. The archive suggests otherwise. There are petitions about church bells, complaints about geese, and a long, bitter dispute over who had the right to cut the reeds on a pond that has since been drained and built over by a petrol station.</p>
+<p class="fill" id="fill-19">What survives is a kind of accidental portrait: a community defined less by its great events than by its small, persistent irritations. If you want to know what a place was like, do not ask what happened there. Ask what people wrote to the council about.</p>
+<p class="fill" id="fill-20">The county archive keeps, in a cellar that smells faintly of apples, a box of letters that nobody has ever catalogued. They are mostly about drains. One correspondent, writing in 1894, complains for eleven pages about a culvert, and the reply, which is also in the box, is a single line thanking him for his interest.</p>
+<p class="fill" id="fill-21">Surveyors of the period tended to describe landscape in terms of what was wrong with it. A hill was never simply a hill; it was a hill that would be difficult to drain. A river was a river that had opinions about property boundaries. It makes their reports a pleasure to read, if not to act on.</p>
+<p class="fill" id="fill-22">Modern readers sometimes assume that the past was quieter. The archive suggests otherwise. There are petitions about church bells, complaints about geese, and a long, bitter dispute over who had the right to cut the reeds on a pond that has since been drained and built over by a petrol station.</p>
+<p class="fill" id="fill-23">What survives is a kind of accidental portrait: a community defined less by its great events than by its small, persistent irritations. If you want to know what a place was like, do not ask what happened there. Ask what people wrote to the council about.</p>
+<p class="fill" id="fill-24">The county archive keeps, in a cellar that smells faintly of apples, a box of letters that nobody has ever catalogued. They are mostly about drains. One correspondent, writing in 1894, complains for eleven pages about a culvert, and the reply, which is also in the box, is a single line thanking him for his interest.</p>
+<p class="fill" id="fill-25">Surveyors of the period tended to describe landscape in terms of what was wrong with it. A hill was never simply a hill; it was a hill that would be difficult to drain. A river was a river that had opinions about property boundaries. It makes their reports a pleasure to read, if not to act on.</p>
+<p class="fill" id="fill-26">Modern readers sometimes assume that the past was quieter. The archive suggests otherwise. There are petitions about church bells, complaints about geese, and a long, bitter dispute over who had the right to cut the reeds on a pond that has since been drained and built over by a petrol station.</p>
+<p class="fill" id="fill-27">What survives is a kind of accidental portrait: a community defined less by its great events than by its small, persistent irritations. If you want to know what a place was like, do not ask what happened there. Ask what people wrote to the council about.</p>
+<p class="fill" id="fill-28">The county archive keeps, in a cellar that smells faintly of apples, a box of letters that nobody has ever catalogued. They are mostly about drains. One correspondent, writing in 1894, complains for eleven pages about a culvert, and the reply, which is also in the box, is a single line thanking him for his interest.</p>
+<p class="fill" id="fill-29">Surveyors of the period tended to describe landscape in terms of what was wrong with it. A hill was never simply a hill; it was a hill that would be difficult to drain. A river was a river that had opinions about property boundaries. It makes their reports a pleasure to read, if not to act on.</p>
+<p class="fill" id="fill-30">Modern readers sometimes assume that the past was quieter. The archive suggests otherwise. There are petitions about church bells, complaints about geese, and a long, bitter dispute over who had the right to cut the reeds on a pond that has since been drained and built over by a petrol station.</p></section>
+<p id="end-marker" data-test="end-marker" style="margin-bottom:200px">End of page marker. If you can read this, you have scrolled a very long way.</p>
+<script>
+// Replace the text node content after 2 seconds (new text node, same element).
+setTimeout(() => {
+  const el = document.getElementById('late');
+  el.textContent = 'Replacement wording: this sentence arrived two seconds after load and replaced the original text entirely, including the text node that any earlier selection pointed at.';
+  el.dataset.replaced = 'true';
+}, 2000);
+</script>
+</body>
+</html>

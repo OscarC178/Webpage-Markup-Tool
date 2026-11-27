@@ -1,0 +1,19 @@
+<!-- Option C "Cursor": the tile is the highlight colour; a text cursor mid-selection sits on it. 128px canvas, 96px artwork. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="c-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE873"/>
+      <stop offset="1" stop-color="#FFCF1F"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="96" height="96" rx="22" fill="url(#c-tile)"/>
+  <!-- the text being selected: a block to the left of the cursor -->
+  <rect x="30" y="50" width="40" height="28" rx="5" fill="#FFFFFF"/>
+  <!-- the text cursor (I-beam) -->
+  <rect x="67" y="38" width="8" height="52" rx="2" fill="#1B1B1F"/>
+  <rect x="57" y="34" width="28" height="8" rx="4" fill="#1B1B1F"/>
+  <rect x="57" y="86" width="28" height="8" rx="4" fill="#1B1B1F"/>
+  <!-- text still to come, to the right -->
+  <rect x="82" y="60" width="16" height="8" rx="4" fill="#1B1B1F" fill-opacity=".35"/>
+  <rect x="16.5" y="16.5" width="95" height="95" rx="21.5" fill="none" stroke="#000000" stroke-opacity=".12"/>
+</svg>

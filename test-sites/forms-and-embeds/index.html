@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parish Council | Contact and feedback</title>
+<style>
+  body { margin:0; font:16px/1.65 system-ui, sans-serif; background:#f4f6f3; color:#232a23; }
+  header { background:#2f4a33; color:#fff; padding:18px 28px; }
+  header h1 { margin:0; font-size:1.5rem; }
+  main { max-width:820px; margin:0 auto; padding:26px 20px 80px; }
+  section { background:#fff; border:1px solid #dde3da; border-radius:8px; padding:20px 24px; margin-bottom:20px; }
+  h2 { margin-top:0; }
+  label { display:block; font-weight:600; margin:12px 0 4px; }
+  input, textarea, select { width:100%; padding:8px 10px; font:inherit; border:1px solid #b8c2b5; border-radius:5px; }
+  textarea { min-height:90px; }
+  #editor { border:2px dashed #7a9a7e; border-radius:6px; padding:12px 14px; min-height:90px; background:#fbfdfb; }
+  iframe { width:100%; height:200px; border:1px solid #b8c2b5; border-radius:6px; }
+  details { border:1px solid #dde3da; border-radius:6px; padding:8px 14px; margin-top:10px; }
+  summary { cursor:pointer; font-weight:600; }
+  .btn { margin-top:14px; width:auto; padding:9px 22px; background:#2f4a33; color:#fff; border:none; border-radius:5px; cursor:pointer; }
+</style>
+</head>
+<body>
+<header><h1>Little Marsham Parish Council</h1></header>
+<main>
+  <section id="intro-section">
+    <h2>Get in touch</h2>
+    <p id="intro-para">The parish council meets on the first Tuesday of each month in the village hall. Residents are welcome to attend, and to <strong>speak for up to three minutes</strong> during the <em>public forum</em> at the start. Please use the form below if you would rather write, and we will reply within ten working days.</p>
+  </section>
+
+  <section id="form-section">
+    <h2>Feedback form</h2>
+    <form id="feedback-form" onsubmit="return false">
+      <label for="f-name">Your name</label>
+      <input id="f-name" type="text" value="Alex Example">
+      <label for="f-topic">Topic</label>
+      <select id="f-topic"><option>Roads and pavements</option><option>Allotments</option><option>Village hall</option></select>
+      <label for="f-msg">Message</label>
+      <textarea id="f-msg">This text sits inside a textarea. Selecting it should not break anything, even though the extension cannot draw overlays inside form controls.</textarea>
+      <p id="form-note" style="margin-bottom:0">Tick the box to say you have read our <a href="#">privacy notice</a>. <label style="display:inline;font-weight:400"><input type="checkbox" style="width:auto"> I agree</label></p>
+      <button class="btn" type="submit">Send</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Draft a response</h2>
+    <div id="editor" contenteditable="true" data-test="editor"><p id="editor-p1">This region is <strong>contenteditable</strong>. Councillors can type a reply here, and the text is <em>live</em>: it can change while somebody is selecting it.</p><p id="editor-p2">A second paragraph, so that a selection can cross an element boundary inside the editable area.</p></div>
+  </section>
+
+  <section>
+    <h2>Embedded notice board</h2>
+    <iframe src="frame.html" id="notice-frame" data-test="notice-frame" title="Notice board"></iframe>
+  </section>
+
+  <section>
+    <h2>Opening hours widget</h2>
+    <opening-hours id="hours-widget" data-test="hours-widget"></opening-hours>
+  </section>
+
+  <section>
+    <h2>Frequently asked</h2>
+    <details id="faq-1" data-test="faq-1" open><summary>Can I park at the village hall?</summary><p id="faq-1-text">Yes. There is space for about twelve cars behind the hall, and a further six on the green when it has not been raining. Please leave the disabled bay free, and be considerate of the playgroup on Wednesday mornings.</p></details>
+    <details id="faq-2"><summary>How do I report a pothole?</summary><p id="faq-2-text">Use the form above or call the clerk. Include the road name and, if you can, a nearby house number. Photographs are welcome but not required.</p></details>
+  </section>
+</main>
+<script>
+// Open shadow DOM component with its own text.
+class OpeningHours extends HTMLElement {
+  constructor() {
+    super();
+    const root = this.attachShadow({ mode: 'open' });
+    root.innerHTML = `
+      <style>p{margin:0 0 .6em;font-family:Georgia,serif} .box{background:#eef4ec;border-left:4px solid #2f4a33;padding:10px 16px;border-radius:4px}</style>
+      <div class="box">
+        <p id="shadow-p1">The parish office is open <strong>Tuesday and Thursday, ten until two</strong>. Outside those hours the clerk can usually be reached by email, and will reply as soon as she has finished the minutes.</p>
+        <p id="shadow-p2">Closed on bank holidays, and on the day of the village fete, for reasons that should be obvious.</p>
+      </div>`;
+  }
+}
+customElements.define('opening-hours', OpeningHours);
+</script>
+</body>
+</html>

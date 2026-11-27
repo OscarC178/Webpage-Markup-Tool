@@ -1,0 +1,20 @@
+<!-- Option B "Nib": a highlighter pen laying down a stroke, on a light tile. 128px canvas, 96px artwork. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="b-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EDEDF2"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="96" height="96" rx="22" fill="url(#b-tile)"/>
+  <!-- the stroke already drawn -->
+  <rect x="28" y="82" width="46" height="14" rx="5" fill="#FFD21F"/>
+  <!-- the pen, tip resting at the end of the stroke -->
+  <g transform="translate(66 92) rotate(40)">
+    <path d="M-8 -15 H8 L5 0 H-5 Z" fill="#FFD21F"/>
+    <rect x="-10" y="-25" width="20" height="11" rx="3" fill="#44444D"/>
+    <rect x="-12" y="-66" width="24" height="43" rx="8" fill="#1B1B1F"/>
+    <rect x="-12" y="-44" width="24" height="8" fill="#FFD21F"/>
+  </g>
+  <rect x="16.5" y="16.5" width="95" height="95" rx="21.5" fill="none" stroke="#000000" stroke-opacity=".14"/>
+</svg>

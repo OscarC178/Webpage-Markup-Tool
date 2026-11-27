@@ -1,0 +1,28 @@
+[
+  {
+    "slug": "plain-fixture",
+    "path": "/basic/index.html",
+    "title": "Harness's own plain page (control)",
+    "stresses": [
+      "nothing: a plain static page; also hosts the migration (t) and keyboard (u) checks"
+    ],
+    "fixture": true,
+    "targets": [
+      {
+        "name": "first",
+        "selector": "#p1",
+        "note": "single line of plain text"
+      },
+      {
+        "name": "wrapping",
+        "selector": "#p2",
+        "note": "wraps over several lines"
+      },
+      {
+        "name": "note",
+        "selector": "#p3",
+        "note": "plain paragraph"
+      }
+    ]
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "name": "webpage-markup-tool",
+  "version": "1.0.0",
+  "description": "Web Page Markup Tool (browser extension). package.json exists only for the browser checks in tests/.",
+  "scripts": {
+    "test": "node tests/run.js",
+    "test:self": "node tests/run.js --self-test",
+    "serve-sites": "node tests/serve.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OscarC178/Webpage-Markup-Tool.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/OscarC178/Webpage-Markup-Tool/issues"
+  },
+  "homepage": "https://github.com/OscarC178/Webpage-Markup-Tool#readme",
+  "devDependencies": {
+    "playwright-core": "^1.65.1"
+  },
+  "private": true
+}

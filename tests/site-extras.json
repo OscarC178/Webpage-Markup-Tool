@@ -1,0 +1,50 @@
+{
+  "_about": "Extra facts about sites in test-sites/sites.json that some checks need. Keyed by site slug. routes: used by check (s). volatile: text the page itself rewrites, used by check (v). surfaces: run the see-through-controls check (w) here. notesOnPage: run the notes-on-page check (x) here; scrollTarget is an element inside an inner scroll box.",
+  "plain-fixture": {
+    "surfaces": true
+  },
+  "news-article": {
+    "surfaces": true,
+    "notesOnPage": {}
+  },
+  "dark-dashboard": {
+    "surfaces": true,
+    "notesOnPage": {
+      "scrollTarget": "#scroll-first"
+    }
+  },
+  "spa": {
+    "routes": {
+      "home": {
+        "name": "home",
+        "link": "#nav a[data-route=\"home\"]",
+        "ready": "#home-intro"
+      },
+      "other": {
+        "name": "routes",
+        "link": "#nav a[data-route=\"routes\"]",
+        "ready": "#routes-intro",
+        "target": "#routes-intro"
+      }
+    }
+  },
+  "feed": {
+    "volatile": [
+      {
+        "name": "ticker (rewritten every second)",
+        "selector": "#ticker"
+      }
+    ]
+  },
+  "edge-cases": {
+    "volatile": [
+      {
+        "name": "late paragraph (replaced 2 s after load)",
+        "selector": "#late"
+      }
+    ]
+  },
+  "docs": {
+    "notesOnPage": {}
+  }
+}

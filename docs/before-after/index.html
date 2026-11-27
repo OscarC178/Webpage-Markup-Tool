@@ -1,0 +1,234 @@
+<title>Markup Tool Before and After</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+  /* Layout: one column of scenarios; each scenario is a pair of screenshots, old on the left, new on the right. */
+  :root {
+    --bg: #F3F4F6; --surface: #FFFFFF; --fg: #16181D; --muted: #555B66; --line: #D5D8DE;
+    --before: #9A3412; --before-bg: #FCE9E0; --after: #166534; --after-bg: #DDF3E4;
+    --note: #FFF6D6; --note-line: #E3C867; --focus: #1D4ED8;
+    --display: "Space Grotesk", system-ui, sans-serif;
+    --body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111318; --surface: #1B1E25; --fg: #ECEEF2; --muted: #A3A9B5; --line: #343945;
+      --before: #FDBA8C; --before-bg: #4A2413; --after: #86EFAC; --after-bg: #123B22;
+      --note: #3A3217; --note-line: #7A6520; --focus: #8AB4FF; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111318; --surface: #1B1E25; --fg: #ECEEF2; --muted: #A3A9B5; --line: #343945;
+    --before: #FDBA8C; --before-bg: #4A2413; --after: #86EFAC; --after-bg: #123B22;
+    --note: #3A3217; --note-line: #7A6520; --focus: #8AB4FF; color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 400 16px/1.55 var(--body); }
+  .wrap {
+    max-width: 1320px; margin: 0 auto; padding-block: 40px 72px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: flex; flex-direction: column; gap: 48px;
+  }
+  h1, h2 { font-family: var(--display); font-weight: 600; text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+  h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.15; }
+  h2 { font-size: 1.375rem; line-height: 1.25; }
+  p { margin: 0; max-width: 68ch; }
+  .lead { color: var(--muted); font-size: 1.0625rem; }
+  header { display: flex; flex-direction: column; gap: 14px; }
+  .status { background: var(--note); border: 1px solid var(--note-line); border-radius: 8px; padding: 14px 16px; max-width: 78ch; }
+  .status strong { font-weight: 600; }
+
+  section { display: flex; flex-direction: column; gap: 14px; }
+  .did { color: var(--muted); }
+  .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+  @media (max-width: 760px) { .pair { grid-template-columns: minmax(0, 1fr); } }
+  figure { margin: 0; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+  .tag {
+    align-self: flex-start; font: 600 0.75rem/1 var(--body); letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 6px 10px; border-radius: 999px;
+  }
+  .before .tag { color: var(--before); background: var(--before-bg); }
+  .after .tag { color: var(--after); background: var(--after-bg); }
+  .shot {
+    display: block; width: 100%; padding: 0; background: var(--surface); cursor: zoom-in;
+    border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
+  }
+  .shot img { display: block; width: 100%; height: auto; }
+  .shot:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .small .shot { width: auto; max-width: 100%; align-self: flex-start; }
+  .small .shot img { width: auto; max-width: 100%; }
+  .none {
+    border: 1px dashed var(--line); border-radius: 8px; padding: 28px 20px; color: var(--muted);
+    background: var(--surface); aspect-ratio: 11 / 7; display: grid; place-items: center; text-align: center;
+  }
+  figcaption { font-size: 0.9375rem; color: var(--fg); max-width: 62ch; }
+
+  table { border-collapse: collapse; width: 100%; font-size: 0.9375rem; font-variant-numeric: tabular-nums; }
+  .table { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  th { font-weight: 600; color: var(--muted); font-size: 0.8125rem; letter-spacing: 0.04em; text-transform: uppercase; }
+
+  dialog { border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 96vh; }
+  dialog::backdrop { background: rgba(10, 12, 16, 0.82); }
+  dialog img { display: block; max-width: 96vw; max-height: 92vh; border-radius: 6px; cursor: zoom-out; }
+  footer { color: var(--muted); font-size: 0.875rem; }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Web Page Markup Tool, before and after</h1>
+    <p class="lead">The same actions on the same test pages, once with the published version 1.1 and once with the rebuilt version 2.0. Every picture is a real screenshot from Chromium 158 with the extension loaded. Select any picture to enlarge it.</p>
+    <p class="status"><strong>Status on 25 November 2026:</strong> version 2.0 is built but has not yet been through the full 16-check test run. Version 1.1 has: across 11 test sites its saved baseline is 102 passes, 49 fails and 14 checks that could not run. Treat the right-hand pictures as what the new build does in these specific cases, not as a finished test result.</p>
+  </header>
+
+  <section>
+    <h2>Selecting text: the toolbar</h2>
+    <p class="did">Dragged across one line of a news article.</p>
+    <div class="pair">
+      <figure class="before"><span class="tag">Before · 1.1</span>
+        <button class="shot" type="button"><img src="img/old-toolbar.png" alt="Old toolbar: three dark text buttons reading Highlight, Underline and Add Note above the selection" width="1100" height="700"></button>
+        <figcaption>Three text buttons. One highlight colour, chosen in a separate settings window.</figcaption></figure>
+      <figure class="after"><span class="tag">After · 2.0</span>
+        <button class="shot" type="button"><img src="img/new-toolbar.png" alt="New toolbar: five colour dots, an underline icon and an add-note icon above the selection" width="1100" height="700"></button>
+        <figcaption>Five colours to pick from directly, then underline and add note. The ring marks the colour used last. It can also be reached and driven from the keyboard.</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>Highlight and underline</h2>
+    <p class="did">Highlighted the first selection in yellow, then underlined the start of the next paragraph.</p>
+    <div class="pair">
+      <figure class="before"><span class="tag">Before · 1.1</span>
+        <button class="shot" type="button"><img src="img/old-marked.png" alt="Old version: article with a yellow highlight and a red underline" width="1100" height="700"></button>
+        <figcaption>Markups are coloured boxes laid over the page and positioned by measurement, so they have to be redrawn whenever the page moves.</figcaption></figure>
+      <figure class="after"><span class="tag">After · 2.0</span>
+        <button class="shot" type="button"><img src="img/new-marked.png" alt="New version: article with a yellow highlight and an underline" width="1100" height="700"></button>
+        <figcaption>Markups are painted as part of the text itself. Nothing is added to the page, so the page's layout cannot shift and the marks stay with the words.</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>Adding a note</h2>
+    <p class="did">Selected a phrase further down the article, chose add note and typed a sentence.</p>
+    <div class="pair">
+      <figure class="before"><span class="tag">Before · 1.1</span>
+        <button class="shot" type="button"><img src="img/old-note.png" alt="Old version: a yellow sticky note at the far left edge of the page with no mark on the text it refers to" width="1100" height="700"></button>
+        <figcaption>A yellow square pinned to the left edge of the page. Nothing shows which words it belongs to.</figcaption></figure>
+      <figure class="after"><span class="tag">After · 2.0</span>
+        <button class="shot" type="button"><img src="img/new-note.png" alt="New version: the phrase is highlighted and a note card sits below it with colour choices, a highlight or underline switch, the note text and a Saved status" width="1100" height="700"></button>
+        <figcaption>The note is attached to a highlight on the words themselves. The card sits beside them, confirms when it has saved, and lets you change colour or style or delete the markup.</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>Scrolling away from a note</h2>
+    <p class="did">With the note saved, went to the top of the article and scrolled down a little.</p>
+    <div class="pair">
+      <figure class="before"><span class="tag">Before · 1.1</span>
+        <button class="shot" type="button"><img src="img/old-scrolled.png" alt="Old version: the page is showing the end of the article where the note is, not the top" width="1100" height="700"></button>
+        <figcaption>The page is at the note, near the end of the article, not where it was scrolled to. The old code rebuilds every note on each scroll and puts the cursor back in it, which pulls the page with it.</figcaption></figure>
+      <figure class="after"><span class="tag">After · 2.0</span>
+        <button class="shot" type="button"><img src="img/new-scrolled.png" alt="New version: the page is near the top of the article, showing the highlight and underline" width="1100" height="700"></button>
+        <figcaption>The page stays where it was scrolled to.</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>A dark website</h2>
+    <p class="did">Highlighted a bold phrase on a near-black dashboard.</p>
+    <div class="pair">
+      <figure class="before"><span class="tag">Before · 1.1</span>
+        <button class="shot" type="button"><img src="img/old-dark-crop.png" alt="Old version: a murky olive wash over light text on a dark background" width="560" height="330"></button>
+        <figcaption>A half-transparent yellow film over the text. On dark pages it turns olive and lowers the contrast of the words under it.</figcaption></figure>
+      <figure class="after"><span class="tag">After · 2.0</span>
+        <button class="shot" type="button"><img src="img/new-dark-crop.png" alt="New version: a solid dark-gold fill behind crisp light text" width="560" height="330"></button>
+        <figcaption>The extension detects the dark background and uses a deeper fill chosen so light text stays readable on it.</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>A website with aggressive styling</h2>
+    <p class="did">A test page built to break add-on controls: forced fonts, reset buttons, and rules that hide anything with "toolbar" in its name. Selected the first line, then tried to highlight it and a line on a yellow panel.</p>
+    <div class="pair">
+      <figure class="before"><span class="tag">Before · 1.1</span>
+        <button class="shot" type="button"><img src="img/old-hostile-toolbar.png" alt="Old version: text is selected but no toolbar is visible anywhere" width="1100" height="700"></button>
+        <figcaption>The text is selected but no toolbar appears: the site's own styling hides it. Nothing can be marked up on this page.</figcaption></figure>
+      <figure class="after"><span class="tag">After · 2.0</span>
+        <button class="shot" type="button"><img src="img/new-hostile-toolbar.png" alt="New version: the toolbar appears above the selection, unaffected by the page styling" width="1100" height="700"></button>
+        <figcaption>The toolbar appears and looks the same as on any other site. The controls are sealed off from the page's styling.</figcaption></figure>
+      <figure class="before"><span class="tag">Before · 1.1</span>
+        <div class="none">No picture: with no toolbar there was nothing to click.</div>
+        <figcaption>The highlight step could not be carried out.</figcaption></figure>
+      <figure class="after"><span class="tag">After · 2.0</span>
+        <button class="shot" type="button"><img src="img/new-hostile-marked.png" alt="New version: first line highlighted in yellow; on the yellow panel the marked words carry an underline as well" width="1100" height="700"></button>
+        <figcaption>Both highlights applied. On the yellow panel a yellow fill would be invisible, so the extension adds an underline in a stronger tone.</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>Print and "Save as PDF"</h2>
+    <p class="did">Printed the marked-up article to PDF with "Background graphics" off, which is Chrome's default. First page, then last page.</p>
+    <div class="pair">
+      <figure class="before"><span class="tag">Before · 1.1</span>
+        <button class="shot" type="button"><img src="img/old-print.png" alt="Old version, printed first page: an empty yellow outline sits beside the wrong line and the underline is under the wrong words" width="765" height="990"></button>
+        <figcaption>The highlight has lost its colour and sits as an empty outline beside the wrong line. The underline is under different words from the ones marked. The boxes kept their on-screen positions while the text re-flowed for paper.</figcaption></figure>
+      <figure class="after"><span class="tag">After · 2.0</span>
+        <button class="shot" type="button"><img src="img/new-print.png" alt="New version, printed first page: highlight and underline are on the right words and the highlight keeps its colour" width="765" height="990"></button>
+        <figcaption>Highlight and underline are on the right words, and the highlight keeps its colour without changing any print setting.</figcaption></figure>
+      <figure class="before"><span class="tag">Before · 1.1</span>
+        <button class="shot" type="button"><img src="img/old-print-last.png" alt="Old version, printed last page" width="765" height="990"></button>
+        <figcaption>Last page. The old version has no printed list of notes.</figcaption></figure>
+      <figure class="after"><span class="tag">After · 2.0</span>
+        <button class="shot" type="button"><img src="img/new-print-last.png" alt="New version, printed last page: a Notes on this page section listing the quoted words and the note text" width="765" height="990"></button>
+        <figcaption>Notes are listed at the end of the document with the words they refer to, so a note can never be cut off or cover the text.</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>The extension's own window</h2>
+    <p class="did">Opened from the toolbar icon while on the marked-up article.</p>
+    <div class="pair">
+      <figure class="before small"><span class="tag">Before · 1.1</span>
+        <button class="shot" type="button"><img src="img/old-popup.png" alt="Old popup titled Markup Exporter with Copy Marked Text and Save Page as PDF buttons and two colour pickers" width="270" height="249"></button>
+        <figcaption>Two export buttons and two colour pickers. It says nothing about the page you are on, and "Copy Marked Text" leaves notes out.</figcaption></figure>
+      <figure class="after small"><span class="tag">After · 2.0</span>
+        <button class="shot" type="button"><img src="img/new-popup.png" alt="New popup showing the page address, 3 markups on this page, Copy as Markdown, Download JSON, Print or save PDF, a Check this page result and a default colour picker" width="320" height="449"></button>
+        <figcaption>Shows what is marked on this page, exports it with notes included, and runs "Check this page" to report markups that could not be found, are hidden or are hard to see. On a PDF or a browser page it says plainly that it cannot work there.</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>What changed underneath</h2>
+    <div class="table"><table>
+      <thead><tr><th>Area</th><th>Before · 1.1</th><th>After · 2.0</th></tr></thead>
+      <tbody>
+        <tr><td>How marks are drawn</td><td>Boxes laid over the page at measured positions</td><td>Painted with the text, nothing added to the page</td></tr>
+        <tr><td>How a mark is found again</td><td>By the page's internal structure, which breaks when a site adds a banner or redesigns</td><td>By the words and their surroundings; if the words are gone it is listed as "not found", never drawn in the wrong place</td></tr>
+        <tr><td>Page address changes</td><td>Following an in-page link made every mark vanish</td><td>In-page links and tracking parameters are ignored</td></tr>
+        <tr><td>Saving</td><td>Four places wrote the whole list; two tabs could overwrite each other</td><td>One queue does all the saving</td></tr>
+        <tr><td>Existing users' data</td><td>n/a</td><td>Converted on update; the old copy is kept, not deleted</td></tr>
+        <tr><td>Permissions requested</td><td>activeTab, scripting, storage, clipboardWrite</td><td>activeTab, storage</td></tr>
+        <tr><td>PDF files in Chrome's viewer</td><td>Fails silently</td><td>Still not supported; the window now says so</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <footer>Test pages are fictional sites written for this project. Screenshots taken at 1100 × 700; print pictures are PDF pages rendered at 90 dpi.</footer>
+</div>
+
+<dialog id="zoom" aria-label="Enlarged screenshot"><img id="zoomImg" alt=""></dialog>
+<script>
+  // Select a screenshot to enlarge it; select again, or press Escape, to close.
+  const zoom = document.getElementById('zoom');
+  const zoomImg = document.getElementById('zoomImg');
+  document.querySelectorAll('.shot').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const img = btn.querySelector('img');
+      zoomImg.src = img.src;
+      zoomImg.alt = img.alt;
+      zoom.showModal();
+    });
+  });
+  zoom.addEventListener('click', () => zoom.close());
+</script>

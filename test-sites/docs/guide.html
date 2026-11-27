@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quillwork Docs | Writing a plugin</title>
+<link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<header class="top"><a class="brand" href="index.html">Quillwork<span>docs</span></a>
+  <nav><a href="index.html">Reference</a><a href="guide.html" class="on">Guide</a><a href="index.html#changelog">Changelog</a></nav></header>
+<div class="layout">
+<aside class="side" id="sidenav">
+  <h4>On this page</h4>
+  <ul><li><a href="#anatomy">Anatomy of a plugin</a></li><li><a href="#hooks">Hooks</a></li><li><a href="#testing">Testing plugins</a></li><li><a href="#history">History</a></li></ul>
+  <h4>More</h4>
+  <ul><li><a href="index.html#api">API reference</a></li></ul>
+</aside>
+<main class="content" id="content">
+  <h1>Writing a plugin</h1>
+  <p id="guide-intro" class="lead">A Quillwork plugin is a JavaScript module with a default export: a function that receives the build context and may register one or more <strong>hooks</strong>. This guide builds a plugin that adds a reading-time estimate to every page.</p>
+
+  <h2 id="anatomy">Anatomy of a plugin</h2>
+  <p id="guide-anatomy">Plugins run in the order they are listed in the configuration file. Each receives a <code>ctx</code> object containing the resolved options, a logger and a <em>registry</em> of hooks. A plugin should do its work inside a hook rather than at load time, because at load time the pages have not yet been read.</p>
+  <pre id="code-plugin" data-test="code-plugin"><code>export default function readingTime(ctx) {
+  ctx.hooks.transform((page) =&gt; {
+    const words = page.text.split(/\s+/).length;
+    page.meta.minutes = Math.max(1, Math.round(words / 220));
+    return page;
+  });
+}</code></pre>
+
+  <h2 id="hooks">Hooks</h2>
+  <table id="hooks-table" data-test="hooks-table">
+    <thead><tr><th>Hook</th><th>Runs</th><th>Receives</th></tr></thead>
+    <tbody>
+      <tr><td><code>read</code></td><td>Once per source file</td><td>Raw file contents</td></tr>
+      <tr><td><code>transform</code></td><td>Once per page, after parsing</td><td>A page object</td></tr>
+      <tr><td><code>write</code></td><td>Once per output file</td><td>The final HTML string</td></tr>
+    </tbody>
+  </table>
+  <p>Hooks may be asynchronous. Quillwork awaits each one before moving on, so a slow plugin slows the whole build; keep network calls out of the hot path where you can.</p>
+
+  <h2 id="testing">Testing plugins</h2>
+  <p id="guide-testing">Because a plugin is only a function, it can be tested without running a build. Construct a fake context, call the plugin, then call the registered hook with a sample page and assert on the result. This takes milliseconds and needs no files on disk, which is why the examples in this documentation are written the way they are.</p>
+
+  <h2 id="history">History</h2>
+  <p>The first release, in the autumn of a year that does not exist, supported a single input format and no plugins at all. Plugins arrived in version 1.2 after a contributor pointed out, with some justification, that everyone was forking the project to add one small feature each.</p>
+  <div style="height:70vh"></div>
+</main>
+</div>
+</body>
+</html>

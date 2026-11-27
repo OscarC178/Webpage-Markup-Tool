@@ -1,0 +1,431 @@
+[
+  {
+    "slug": "news-article",
+    "path": "/news-article/index.html",
+    "title": "News article (serif long-form)",
+    "stresses": [
+      "inline strong/em/a spans crossing sentence boundaries",
+      "pull quotes and figures",
+      "footnote anchors",
+      "drop-cap first letter",
+      "print stylesheet"
+    ],
+    "targets": [
+      {
+        "name": "Plain paragraph",
+        "selector": "#para-long",
+        "note": "Plain long paragraph"
+      },
+      {
+        "name": "Inline spans",
+        "selector": "#para-inline",
+        "note": "Selection crossing em, strong, sup and a elements"
+      },
+      {
+        "name": "Drop-cap paragraph",
+        "selector": "#para-intro",
+        "note": "::first-letter float with em/strong"
+      },
+      {
+        "name": "Pull quote",
+        "selector": "#pull-1",
+        "note": "blockquote with cite child"
+      },
+      {
+        "name": "Figure caption",
+        "selector": "#figcap-1",
+        "note": "Caption with em and span inside SVG figure"
+      }
+    ]
+  },
+  {
+    "slug": "docs",
+    "path": "/docs/index.html",
+    "title": "Documentation (sticky header, sidebar, anchors)",
+    "stresses": [
+      "sticky header and sidebar",
+      "hash URLs",
+      "pre/code blocks",
+      "tables",
+      "second page"
+    ],
+    "targets": [
+      {
+        "name": "Plain paragraph",
+        "selector": "#para-config",
+        "note": "Paragraph with code and em"
+      },
+      {
+        "name": "Inline code spans",
+        "selector": "#para-install",
+        "note": "strong and code across sentence"
+      },
+      {
+        "name": "Code block",
+        "selector": "#code-install",
+        "note": "pre/code with newlines"
+      },
+      {
+        "name": "Options table",
+        "selector": "#options-table",
+        "note": "Table cells with code children"
+      },
+      {
+        "name": "API paragraph",
+        "selector": "#para-api",
+        "note": "Paragraph with link to #errors"
+      }
+    ]
+  },
+  {
+    "slug": "spa",
+    "path": "/spa/index.html?view=home",
+    "title": "Single-page app (pushState)",
+    "stresses": [
+      "history.pushState navigation without reload",
+      "content rendered 300 ms late",
+      "same path with changing query string"
+    ],
+    "targets": [
+      {
+        "name": "Home intro",
+        "selector": "#home-intro",
+        "note": "Rendered by JS after ~300 ms; wait for #app[data-ready]"
+      },
+      {
+        "name": "Home inline spans",
+        "selector": "#home-inline",
+        "note": "strong containing em, plus a link"
+      },
+      {
+        "name": "App container",
+        "selector": "#app[data-test=\"app\"]",
+        "note": "Container that is rewritten on every navigation"
+      }
+    ]
+  },
+  {
+    "slug": "feed",
+    "path": "/feed/index.html",
+    "title": "Infinite-scroll feed with live ticker",
+    "stresses": [
+      "MutationObserver churn from 1 s ticker",
+      "infinite scroll appending nodes",
+      "layout shifting below the fold"
+    ],
+    "targets": [
+      {
+        "name": "First post",
+        "selector": "#post-1-text",
+        "note": "Static paragraph with em and strong"
+      },
+      {
+        "name": "Second post",
+        "selector": "#post-2-text",
+        "note": "Plain post"
+      },
+      {
+        "name": "Ticker",
+        "selector": "#ticker",
+        "note": "Text node replaced every second"
+      },
+      {
+        "name": "Feed container",
+        "selector": "#feed",
+        "note": "Parent that grows on scroll"
+      }
+    ]
+  },
+  {
+    "slug": "shop",
+    "path": "/shop/index.html",
+    "title": "Shop product page",
+    "stresses": [
+      "tabs with hidden panels",
+      "accordion",
+      "sticky basket bar",
+      "SVG gallery",
+      "spec table"
+    ],
+    "targets": [
+      {
+        "name": "Product blurb",
+        "selector": "#product-blurb",
+        "note": "Paragraph with strong and em"
+      },
+      {
+        "name": "Description tab",
+        "selector": "#desc-text",
+        "note": "Visible by default"
+      },
+      {
+        "name": "Spec table (hidden tab)",
+        "selector": "#spec-table",
+        "note": "Inside a hidden tab until Specification tab is clicked"
+      },
+      {
+        "name": "Accordion body",
+        "selector": "#acc-1-text",
+        "note": "Open by default"
+      },
+      {
+        "name": "Sticky basket bar",
+        "selector": "#basket-text",
+        "note": "position:fixed bar with strong"
+      }
+    ]
+  },
+  {
+    "slug": "dark-dashboard",
+    "path": "/dark-dashboard/index.html",
+    "title": "Dark analytics dashboard",
+    "stresses": [
+      "light-on-dark text",
+      "inner scroll container",
+      "position:fixed sidebar",
+      "yellow and red text clashing with markup colours"
+    ],
+    "targets": [
+      {
+        "name": "Summary paragraph",
+        "selector": "#card-summary",
+        "note": "Paragraph with strong and em"
+      },
+      {
+        "name": "Inner scrolling first entry",
+        "selector": "#scroll-first",
+        "note": "First paragraph in overflow:auto panel"
+      },
+      {
+        "name": "Inner scrolling last entry",
+        "selector": "#scroll-bottom",
+        "note": "Needs scrolling the inner panel first"
+      },
+      {
+        "name": "Fixed sidebar note",
+        "selector": "#sidebar-note",
+        "note": "position:fixed element"
+      },
+      {
+        "name": "Yellow text",
+        "selector": "#warn-yellow",
+        "note": "Yellow on near-black"
+      },
+      {
+        "name": "Red text",
+        "selector": "#warn-red",
+        "note": "Red on near-black"
+      }
+    ]
+  },
+  {
+    "slug": "multilingual",
+    "path": "/multilingual/index.html",
+    "title": "Multilingual magazine",
+    "stresses": [
+      "CSS multi-column layout",
+      "RTL Arabic",
+      "CJK without spaces",
+      "emoji with ZWJ sequences",
+      "tiny and huge type",
+      "justified hyphenated text"
+    ],
+    "targets": [
+      {
+        "name": "Column paragraph",
+        "selector": "#col-para-1",
+        "note": "Paragraph inside multi-column flow"
+      },
+      {
+        "name": "Column inline spans",
+        "selector": "#col-para-2",
+        "note": "strong containing em"
+      },
+      {
+        "name": "RTL paragraph",
+        "selector": "#rtl-para",
+        "note": "dir=rtl Arabic with embedded Latin"
+      },
+      {
+        "name": "CJK paragraph",
+        "selector": "#cjk-para",
+        "note": "Japanese, Chinese and Korean"
+      },
+      {
+        "name": "Emoji paragraph",
+        "selector": "#emoji-para",
+        "note": "Multi code point emoji"
+      },
+      {
+        "name": "Tiny text",
+        "selector": "#tiny-text",
+        "note": "7px type"
+      }
+    ]
+  },
+  {
+    "slug": "forms-and-embeds",
+    "path": "/forms-and-embeds/index.html",
+    "title": "Forms and embeds",
+    "stresses": [
+      "inputs and textarea",
+      "contenteditable",
+      "same-origin iframe",
+      "open shadow DOM",
+      "details/summary"
+    ],
+    "targets": [
+      {
+        "name": "Intro paragraph",
+        "selector": "#intro-para",
+        "note": "Plain paragraph with strong and em"
+      },
+      {
+        "name": "Contenteditable",
+        "selector": "#editor-p1",
+        "note": "Editable region"
+      },
+      {
+        "name": "Textarea",
+        "selector": "#f-msg",
+        "note": "Form control, text not in a text node"
+      },
+      {
+        "name": "Shadow host",
+        "selector": "#hours-widget",
+        "note": "Text lives in open shadow root (#shadow-p1)"
+      },
+      {
+        "name": "Details content",
+        "selector": "#faq-1-text",
+        "note": "Inside an open details element"
+      }
+    ]
+  },
+  {
+    "slug": "edge-cases",
+    "path": "/edge-cases/index.html",
+    "title": "Edge cases",
+    "stresses": [
+      "quote and apostrophe in ids",
+      "duplicate ids",
+      "CSS transform",
+      "horizontal scroll table",
+      "SVG text",
+      "user-select:none",
+      "4000px+ page with body offsets",
+      "text replaced after 2 s"
+    ],
+    "targets": [
+      {
+        "name": "Plain paragraph",
+        "selector": "#edge-intro",
+        "note": "Intro with strong"
+      },
+      {
+        "name": "Double-quote id",
+        "selector": "[data-test=\"id-dquote\"]",
+        "note": "id contains a double quote"
+      },
+      {
+        "name": "Apostrophe id",
+        "selector": "[data-test=\"id-apostrophe\"]",
+        "note": "id contains an apostrophe"
+      },
+      {
+        "name": "Duplicate id (second)",
+        "selector": "[data-test=\"dupe-second\"]",
+        "note": "Shares id with dupe-first"
+      },
+      {
+        "name": "Transformed block",
+        "selector": "#xform",
+        "note": "rotate and scale"
+      },
+      {
+        "name": "Replaced text",
+        "selector": "#late",
+        "note": "Text replaced at 2 s; check [data-replaced]"
+      },
+      {
+        "name": "Last paragraph",
+        "selector": "#end-marker",
+        "note": "Bottom of a very long page"
+      }
+    ]
+  },
+  {
+    "slug": "pdf-document",
+    "path": "/pdf-document/index.html",
+    "title": "PDF document",
+    "stresses": [
+      "embedded PDF viewer",
+      "links to PDF",
+      "extension cannot reach into PDF viewer"
+    ],
+    "pdf": "/pdf-document/sample.pdf",
+    "targets": [
+      {
+        "name": "Intro paragraph",
+        "selector": "#reports-intro",
+        "note": "Paragraph with strong and em"
+      },
+      {
+        "name": "PDF link",
+        "selector": "#pdf-link",
+        "note": "Link to sample.pdf"
+      },
+      {
+        "name": "Embed element",
+        "selector": "#pdf-embed",
+        "note": "Embedded PDF viewer"
+      }
+    ]
+  },
+  {
+    "slug": "hostile-css",
+    "path": "/hostile-css/index.html",
+    "title": "Hostile CSS",
+    "stresses": [
+      "!important universal resets",
+      "transformed positioned zoomed body",
+      "max z-index fixed layers",
+      "rules matching toolbar/note names",
+      "gradient, pattern and clipped-text backgrounds",
+      "yellow/red text",
+      "print stylesheet"
+    ],
+    "targets": [
+      {
+        "name": "Intro paragraph",
+        "selector": "#hc-intro",
+        "note": "Plain paragraph under universal resets"
+      },
+      {
+        "name": "Inline spans",
+        "selector": "#hc-inline",
+        "note": "strong, em and link"
+      },
+      {
+        "name": "Yellow background",
+        "selector": "#bg-yellow",
+        "note": "Hides a yellow highlight"
+      },
+      {
+        "name": "Colour clash line",
+        "selector": "#colour-clash",
+        "note": "Yellow, red and pale grey spans"
+      },
+      {
+        "name": "Gradient clipped text",
+        "selector": "#clip-text",
+        "note": "background-clip:text"
+      },
+      {
+        "name": "Fixed modal layer",
+        "selector": "#modal-layer",
+        "note": "z-index 2147483646"
+      }
+    ]
+  }
+]

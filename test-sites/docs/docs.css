@@ -1,0 +1,29 @@
+:root { --bg:#fff; --fg:#1f2933; --muted:#616e7c; --line:#e4e7eb; --brand:#0b6e99; --code:#f4f6f8; }
+* { box-sizing:border-box; }
+html { scroll-behavior:auto; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.65 system-ui, -apple-system, "Segoe UI", sans-serif; }
+.top { position:sticky; top:0; z-index:50; height:56px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; background:#102a43; color:#fff; }
+.top .brand { color:#fff; text-decoration:none; font-weight:700; font-size:1.2rem; }
+.top .brand span { font-weight:400; opacity:.7; margin-left:6px; }
+.top nav a { color:#d9e2ec; text-decoration:none; margin-left:20px; padding:4px 0; }
+.top nav a.on { color:#fff; border-bottom:2px solid #7cc4e8; }
+.layout { display:flex; max-width:1200px; margin:0 auto; }
+.side { position:sticky; top:56px; align-self:flex-start; width:250px; height:calc(100vh - 56px); overflow:auto; padding:24px 16px; border-right:1px solid var(--line); }
+.side h4 { margin:0 0 8px; font-size:.75rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+.side ul { list-style:none; padding:0; margin:0 0 24px; }
+.side a { display:block; padding:5px 10px; color:var(--fg); text-decoration:none; border-radius:4px; }
+.side a:hover { background:var(--code); }
+.content { flex:1; min-width:0; padding:32px 48px 80px; max-width:860px; }
+h1 { font-size:2.2rem; margin:0 0 12px; }
+h2 { margin:2.2em 0 .5em; padding-top:.4em; border-top:1px solid var(--line); scroll-margin-top:72px; }
+h3 { margin:1.6em 0 .4em; scroll-margin-top:72px; }
+.lead { font-size:1.15rem; color:#334e68; }
+a { color:var(--brand); }
+code { font:.9em/1.4 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; background:var(--code); padding:.1em .35em; border-radius:3px; }
+pre { background:#0f1e2b; color:#e6edf3; padding:16px 18px; border-radius:6px; overflow:auto; line-height:1.5; }
+pre code { background:none; padding:0; color:inherit; font-size:.88rem; }
+table { border-collapse:collapse; width:100%; margin:1em 0; font-size:.95rem; }
+th, td { border:1px solid var(--line); padding:8px 12px; text-align:left; vertical-align:top; }
+th { background:var(--code); }
+@media (max-width:800px){ .side{display:none} .content{padding:20px} }
+@media print { .top, .side { display:none; } .layout { display:block; } .content { padding:0; max-width:none; } pre { background:#fff; color:#000; border:1px solid #000; white-space:pre-wrap; } }

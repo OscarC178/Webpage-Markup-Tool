@@ -1,0 +1,60 @@
+Highlighter and notes for web pages and PDFs. Highlight text in five colours, underline key phrases and add notes beside what you read. Everything is saved automatically and is there when you come back.
+
+WHAT YOU CAN DO
+
+Highlight and underline
+Select any text and pick a colour. Highlights stay readable on dark websites, and they never move the page around.
+
+Add notes to any passage
+Attach a note to the text you select. Notes sit in the margin beside the passage, so you can see your thinking at a glance.
+
+Annotate PDFs
+Click the extension's icon on a PDF and choose "Mark up this PDF". Highlight, underline and add notes just as you do on a web page. Your marks stay with the PDF, even if you open it again from a different link or from your computer.
+
+Come back to your work
+Your highlights and notes reappear every time you revisit a page, even when the site has changed its layout. If a passage has been removed, the mark and its note are kept and listed for you.
+
+Export your highlights and notes
+Copy everything as Markdown, download it as a file, or print and save the page as a PDF with your highlights in place and your notes listed at the end.
+
+Private by design
+Your highlights and notes are saved only on your own computer. Nothing is collected, and there is no account to create.
+
+Keyboard shortcuts
+Alt+Shift+H to mark the selected text. Alt+Shift+N to jump to the next note.
+
+WHO IT IS FOR
+
+Students: turn online articles, textbooks and lecture PDFs into study notes for revision and exams.
+
+Researchers: collect quotes, data and sources from across the web and export them into one document.
+
+Writers and professionals: annotate articles and reports, and keep the passages you need for your own work.
+
+Curious readers: build a personal library of the things worth remembering.
+
+GOOD TO KNOW
+
+Marking up PDFs needs Chrome 147 or newer; web pages work on older versions. Scanned PDFs (pictures of pages with no text) can be read and printed, but not marked up. To mark up PDFs saved on your computer, use "Open a file…" in the PDF viewer, or switch on "Allow access to file URLs" for the extension in chrome://extensions.
+
+WHAT'S NEW
+
+2.1 (26/11/26)
++ Mark up PDFs: highlight, underline and add notes
++ Marks stay with the PDF wherever you open it from
++ Print or save a PDF with your marks on the original pages and notes listed at the end
++ Optional: always open PDFs in the markup viewer
+
+2.0 (25/11/26)
++ New look, with five highlight colours right where you select
++ Notes attach to the text you select and show in the margin
++ Highlights stay readable on dark websites
++ Print and Save as PDF keep highlights in place and list your notes
++ Copy as Markdown or download as a file
++ Marks are found again when a site changes its layout
++ Asks for fewer permissions
++ Existing highlights and notes carry over automatically
+
+1.1 (21/9/25)
++ Highlight and underline colour customisation
++ Support for single-page application websites

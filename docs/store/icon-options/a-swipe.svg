@@ -1,0 +1,20 @@
+<!-- Option A "Swipe": one highlighted letter on a dark tile. 128px canvas, 96px artwork. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="a-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2E2E35"/>
+      <stop offset="1" stop-color="#17171B"/>
+    </linearGradient>
+    <linearGradient id="a-mark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE873"/>
+      <stop offset="1" stop-color="#FFD21F"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="96" height="96" rx="22" fill="url(#a-tile)"/>
+  <!-- the highlighter swipe, slightly tilted like a hand stroke -->
+  <rect x="26" y="32" width="76" height="64" rx="10" fill="url(#a-mark)" transform="rotate(-6 64 64)"/>
+  <!-- the highlighted letter -->
+  <path fill-rule="evenodd" fill="#17171B"
+        d="M57 39 H71 L90 89 H77 L73.5 79 H54.5 L51 89 H38 Z M64 52 L58.5 68.5 H69.5 Z"/>
+  <rect x="16.5" y="16.5" width="95" height="95" rx="21.5" fill="none" stroke="#FFFFFF" stroke-opacity=".14"/>
+</svg>
