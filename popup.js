@@ -93,7 +93,7 @@
     if (!urlLib.pdfViewerSupported()) {
       $('pdfOpenBtn').hidden = true;
       $('pdfAutoRow').hidden = true;
-      $('pdfStatus').textContent = 'Marking up PDFs needs a newer version of Chrome. Update Chrome, then try again.';
+      $('pdfStatus').textContent = 'Marking up PDFs needs Chrome 147 or newer. Update Chrome, then try again.';
       return true;
     }
     // Automatic opening works only for web PDFs (the extension does not run in file:// tabs).

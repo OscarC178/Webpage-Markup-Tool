@@ -477,7 +477,7 @@ module.exports = function makePdfCheck({ notePlacementProblem, sharesArea }) {
       const status = (await popup.textContent(V.popup.status)).trim();
       const button = await popup.locator(V.popup.open).isVisible();
       await snap('i', popup, 'popup');
-      if (button || !/newer version of Chrome/i.test(status)) bad('i', `popup: button visible ${button}, message "${status}"`);
+      if (button || !/needs Chrome \d+ or newer/i.test(status)) bad('i', `popup: button visible ${button}, message "${status}"`);
       else say('i', `no "Mark up this PDF" button; the popup says: "${status}"`);
       const reply = await popup.evaluate((m) => chrome.runtime.sendMessage(m), { type: 'pdf.openViewer', url, tabId: tab.id });
       if (!reply || reply.ok) bad('i', 'the background worker still agreed to send the tab to the viewer');

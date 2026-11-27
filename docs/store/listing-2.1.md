@@ -15,15 +15,21 @@ in that file.
 - Permission warnings: unchanged. Chrome shows the same single warning as 2.0, "Read and change all your data on all websites" (checked with `chrome.management.getPermissionWarningsByManifest` on Chromium 158). Existing users should not be asked to re-approve.
 - Storage: marks on a PDF are stored under the PDF's own identity, plus up to 20 addresses it was opened from. PDFs a site only gives to its own tab are cached on the device (newest 20) in the extension's Cache Storage.
 - Package size: about 2.6 MB zipped (2.0 was 0.06 MB). Nearly all of it is pdf.js and its fonts, character maps and image decoders.
-- Minimum Chrome: still 114. The PDF viewer needs about Chrome 147 or later; on older Chrome, PDFs stay in Chrome's own viewer and web pages work as before.
+- Minimum Chrome: still 114. The PDF viewer needs Chrome 147 or later (confirmed against MDN browser-compat-data: Math.sumPrecise 147, Map.getOrInsertComputed 145); on older Chrome, PDFs stay in Chrome's own viewer and web pages work as before.
 
 ## 1. Store listing tab
 
 ### Summary (from `description` in manifest.json; 129 characters, limit 132)
 
 ```
-Highlight, underline and add notes to web pages and PDFs. Your marks are there when you come back, and export to Markdown or PDF.
+Highlighter and notes for web pages and PDFs. Highlight, underline and annotate text. Auto-saved, with export to Markdown or PDF.
 ```
+
+Name (from `name` in manifest.json): `Web Page Markup Tool: Highlighter & Notes`
+
+### Description: superseded on 27 Nov 2026
+
+The full rewritten description to paste is in `docs/store/description-2.1.txt`. The two blocks below are the earlier patch-style version and are kept for reference only.
 
 ### Description: new block to paste above the "2.0 Updates" block
 
@@ -50,7 +56,7 @@ Good to know: PDF files opened in Chrome's own viewer can't be marked up.
 with:
 
 ```
-Good to know: PDFs open in the extension's own PDF viewer. Scanned PDFs (pictures of pages with no text) can be read and printed, but not marked up. To mark up PDFs saved on your computer, use "Open a file…" in the viewer, or switch on "Allow access to file URLs" for the extension in chrome://extensions.
+Good to know: PDFs open in the extension's own PDF viewer, which needs Chrome 147 or newer (web pages work on older versions). Scanned PDFs (pictures of pages with no text) can be read and printed, but not marked up. To mark up PDFs saved on your computer, use "Open a file…" in the viewer, or switch on "Allow access to file URLs" for the extension in chrome://extensions.
 ```
 
 Also in the description, "transforms any webpage into your personal canvas" can stay; it is still true.

@@ -26,7 +26,7 @@ Limits
 *   Print PDFs with the viewer's Print button or Ctrl+P. Chrome's own menu Print cannot prepare the pages and prints a notice instead.
 *   A hyphenated word split across two lines of a PDF is saved joined up ("well-known" may be saved as "wellknown").
 *   PDF forms are shown but cannot be filled in. Arabic text in some PDFs cannot be read by the viewer, so it cannot be marked.
-*   The PDF viewer needs a recent Chrome (about version 147 or later). On an older Chrome the extension still works on web pages and PDFs stay in Chrome's own viewer.
+*   Marking up PDFs needs Chrome 147 or later (web pages need Chrome 114 or later). On an older Chrome the extension still works on web pages and PDFs stay in Chrome's own viewer.
 *   Text inside embedded frames, and text being typed into a form or editor, cannot be marked up.
 *   Chrome does not allow extensions on its own pages or on the Chrome Web Store.
 

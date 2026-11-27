@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Web Page Markup Tool",
+  "name": "Web Page Markup Tool: Highlighter & Notes",
+  "short_name": "Markup Tool",
   "version": "2.1",
-  "description": "Highlight, underline and add notes to web pages and PDFs. Your marks are there when you come back, and export to Markdown or PDF.",
+  "description": "Highlighter and notes for web pages and PDFs. Highlight, underline and annotate text. Auto-saved, with export to Markdown or PDF.",
   "minimum_chrome_version": "114",
   "permissions": [
     "activeTab",
